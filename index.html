@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donera till Gaza – Gör skillnad idag</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-beige': '#F5F1EB',
+                        'soft-red': '#D4756B',
+                        'warm-red': '#C65D51',
+                        'light-beige': '#FAF8F5',
+                        'dark-beige': '#E8E0D6',
+                        'gold': '#D4AF37'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
+                        'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'heart-beat': 'heartBeat 1.5s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulseSoft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(212, 117, 107, 0.3); }
+            to { box-shadow: 0 0 30px rgba(212, 117, 107, 0.6); }
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
+        }
+        
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200px 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #FAF8F5 0%, #F5F1EB 50%, #E8E0D6 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #D4756B 0%, #C65D51 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover:before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 117, 107, 0.4);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #D4756B, #C65D51, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .observer-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .observer-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            color: rgba(212, 117, 107, 0.3);
+            animation: floatHeart 6s linear infinite;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen overflow-x-hidden">
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts">
+        <i class="floating-heart fas fa-heart" style="left: 10%; animation-delay: 0s; font-size: 20px;"></i>
+        <i class="floating-heart fas fa-heart" style="left: 20%; animation-delay: 1s; font-size: 15px;"></i>
+        <i class="floating-heart fas fa-heart" style="left: 30%; animation-delay: 2s; font-size: 25px;"></i>
+        <i class="floating-heart fas fa-heart" style="left: 40%; animation-delay: 3s; font-size: 18px;"></i>
+        <i class="floating-heart fas fa-heart" style="left: 50%; animation-delay: 4s; font-size: 22px;"></i>
+        <i class="floating-heart fas fa-heart" style="left: 60%; animation-delay: 5s; font-size: 16px;"></i>
+        <i class="floating-heart fas fa-heart" style="left: 70%; animation-delay: 6s; font-size: 24px;"></i>
+        <i class="floating-heart fas fa-heart" style="left: 80%; animation-delay: 7s; font-size: 19px;"></i>
+        <i class="floating-heart fas fa-heart" style="left: 90%; animation-delay: 8s; font-size: 21px;"></i>
+    </div>
+
+    <!-- Header -->
+    <header class="relative glass-effect shadow-xl">
+        <div class="container mx-auto px-4 py-12 text-center">
+            <div class="animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold text-gradient mb-6 animate-pulse-soft">
+                    Donera till Gaza – Gör skillnad idag
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed animate-slide-up">
+                    Varje krona hjälper. Din insats kan rädda liv.
+                </p>
+                <div class="mt-8 animate-bounce-gentle">
+                    <i class="fas fa-heart text-4xl text-soft-red animate-heart-beat"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 max-w-6xl">
+        <!-- Swish Donation Section -->
+        <section class="observer-element glass-effect rounded-3xl shadow-2xl p-8 md:p-12 mb-12 card-hover relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-soft-red via-gold to-soft-red"></div>
+            
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 bg-gradient-to-br from-soft-red to-warm-red rounded-full mb-6 animate-float">
+                    <i class="fas fa-mobile-alt text-4xl text-white"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Donera med Swish</h2>
+                <p class="text-xl text-gray-600">Snabbt, säkert och enkelt</p>
+            </div>
+
+            <div class="max-w-lg mx-auto">
+                <div class="mb-6">
+                    <label for="amount" class="block text-lg font-semibold text-gray-700 mb-3">
+                        <i class="fas fa-coins text-gold mr-2"></i>
+                        Välj belopp (minimum 100 kr)
+                    </label>
+                    <select id="amount" class="w-full p-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-soft-red focus:border-soft-red transition-all duration-300 bg-white shadow-lg">
+                        <option value="100">100 kr</option>
+                        <option value="200">200 kr</option>
+                        <option value="500">500 kr</option>
+                        <option value="1000">1000 kr</option>
+                        <option value="2000">2000 kr</option>
+                        <option value="5000">5000 kr</option>
+                        <option value="custom">Annat belopp</option>
+                    </select>
+                </div>
+
+                <div id="customAmount" class="mb-6 hidden">
+                    <input type="number" id="customAmountInput" min="100" placeholder="Ange belopp (minst 100 kr)" 
+                           class="w-full p-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-soft-red focus:border-soft-red transition-all duration-300 bg-white shadow-lg">
+                </div>
+
+                <button onclick="generateQR()" class="w-full btn-primary text-white font-bold py-4 px-8 rounded-xl text-lg mb-8 transform transition-all duration-300 shadow-xl">
+                    <i class="fas fa-qrcode mr-3"></i>
+                    Generera Swish QR-kod
+                </button>
+
+                <div id="qrSection" class="text-center hidden">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl mb-6 animate-glow">
+                        <img id="qrCode" alt="Swish QR Code" class="w-64 h-64 mx-auto mb-6 border-4 border-soft-red rounded-2xl shadow-lg animate-pulse-soft">
+                        <div class="bg-gradient-to-r from-soft-red to-warm-red text-white p-4 rounded-xl">
+                            <p class="text-lg font-semibold">
+                                <i class="fas fa-mobile-alt mr-2"></i>
+                                Swisha till <strong>070 461 15 57</strong>
+                            </p>
+                            <p class="text-lg">
+                                Belopp: <span id="selectedAmount" class="font-bold text-gold"></span>
+                            </p>
+                            <p class="text-lg">
+                                Meddelande: <strong>Donation Gaza</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-light-beige to-warm-beige p-6 rounded-2xl shadow-inner">
+                    <p class="text-center text-gray-700 leading-relaxed">
+                        <i class="fas fa-info-circle text-soft-red mr-2 animate-pulse"></i>
+                        Swisha till <strong class="text-soft-red">070 461 15 57</strong> (minst 100 kr) och skriv <strong class="text-soft-red">'Donation Gaza'</strong> som meddelande.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bank Transfer Section -->
+        <section class="observer-element glass-effect rounded-3xl shadow-2xl p-8 md:p-12 mb-12 card-hover relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold via-soft-red to-gold"></div>
+            
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 bg-gradient-to-br from-gold to-yellow-600 rounded-full mb-6 animate-float" style="animation-delay: 0.5s;">
+                    <i class="fas fa-university text-4xl text-white"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Donera via Banköverföring</h2>
+                <p class="text-xl text-gray-600">Revolut - För internationella donationer</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-br from-white to-light-beige p-8 rounded-2xl shadow-xl mb-6 border border-gray-100">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="transform hover:scale-105 transition-transform duration-300">
+                                <span class="text-sm font-semibold text-soft-red uppercase tracking-wide">Mottagare:</span>
+                                <p class="text-xl font-bold text-gray-800 mt-1">Nadir Boumediene</p>
+                            </div>
+                            <div class="transform hover:scale-105 transition-transform duration-300">
+                                <span class="text-sm font-semibold text-soft-red uppercase tracking-wide">IBAN:</span>
+                                <div class="bg-gray-800 text-green-400 font-mono text-lg p-4 rounded-lg mt-2 shadow-inner relative overflow-hidden">
+                                    <div class="shimmer absolute inset-0"></div>
+                                    LT51 3250 0230 2205 1319
+                                </div>
+                            </div>
+                            <div class="transform hover:scale-105 transition-transform duration-300">
+                                <span class="text-sm font-semibold text-soft-red uppercase tracking-wide">BIC/SWIFT:</span>
+                                <p class="text-xl font-bold text-gray-800 mt-1">REVOLT21</p>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="transform hover:scale-105 transition-transform duration-300">
+                                <span class="text-sm font-semibold text-soft-red uppercase tracking-wide">Bank:</span>
+                                <p class="text-xl font-bold text-gray-800 mt-1">Revolut Bank UAB</p>
+                            </div>
+                            <div class="transform hover:scale-105 transition-transform duration-300">
+                                <span class="text-sm font-semibold text-soft-red uppercase tracking-wide">Adress:</span>
+                                <p class="text-gray-800 mt-1 leading-relaxed">
+                                    Konstitucijos ave. 21B<br>
+                                    08130, Vilnius, Lithuania
+                                </p>
+                            </div>
+                            <div class="transform hover:scale-105 transition-transform duration-300">
+                                <span class="text-sm font-semibold text-soft-red uppercase tracking-wide">Korrespondent BIC:</span>
+                                <p class="text-xl font-bold text-gray-800 mt-1">BARCGB22</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t-2 border-gradient-to-r from-soft-red to-gold">
+                        <div class="text-center">
+                            <span class="text-sm font-semibold text-soft-red uppercase tracking-wide">Meddelande:</span>
+                            <p class="text-2xl font-bold text-gray-800 mt-2">Donation Gaza</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="copyIBAN()" class="w-full btn-primary text-white font-bold py-4 px-8 rounded-xl text-lg transform transition-all duration-300 shadow-xl">
+                    <i class="fas fa-copy mr-3"></i>
+                    Kopiera IBAN
+                </button>
+            </div>
+        </section>
+
+        <!-- Emotional Section with Enhanced Visuals -->
+        <section class="observer-element glass-effect rounded-3xl shadow-2xl p-8 md:p-12 mb-12 card-hover relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-soft-red via-gold to-soft-red"></div>
+            
+            <div class="lg:flex lg:items-center lg:space-x-12">
+                <div class="lg:w-1/2 mb-8 lg:mb-0 relative">
+                    <div class="relative overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Humanitarian aid" 
+                             class="w-full h-80 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <p class="text-sm font-semibold opacity-90">Tillsammans skapar vi hopp</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating elements around image -->
+                    <div class="absolute -top-4 -right-4 bg-soft-red text-white p-3 rounded-full animate-bounce-gentle">
+                        <i class="fas fa-heart text-xl"></i>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-gold text-white p-3 rounded-full animate-float">
+                        <i class="fas fa-hands-helping text-xl"></i>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="space-y-6">
+                        <h3 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+                            <i class="fas fa-heart text-soft-red mr-3 animate-heart-beat"></i>
+                            Tillsammans skapar vi hopp
+                        </h3>
+                        
+                        <div class="space-y-4 text-lg text-gray-700 leading-relaxed">
+                            <p class="transform hover:translate-x-2 transition-transform duration-300">
+                                Gaza behöver vår hjälp mer än någonsin. Genom din donation kan vi tillsammans skapa hopp och stöd för drabbade familjer.
+                            </p>
+                            <p class="transform hover:translate-x-2 transition-transform duration-300">
+                                Varje bidrag, oavsett storlek, gör en verklig skillnad för de som behöver det mest. Tack för din medmänsklighet och ditt stöd.
+                            </p>
+                        </div>
+                        
+                        <!-- Impact Stats -->
+                        <div class="grid grid-cols-2 gap-4 mt-8">
+                            <div class="bg-gradient-to-br from-soft-red to-warm-red text-white p-4 rounded-xl text-center transform hover:scale-105 transition-transform duration-300">
+                                <div class="text-2xl font-bold animate-pulse-soft">100+</div>
+                                <div class="text-sm opacity-90">Familjer hjälpta</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-gold to-yellow-600 text-white p-4 rounded-xl text-center transform hover:scale-105 transition-transform duration-300">
+                                <div class="text-2xl font-bold animate-pulse-soft">24/7</div>
+                                <div class="text-sm opacity-90">Stöd tillgängligt</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Indicators -->
+        <section class="observer-element glass-effect rounded-3xl shadow-2xl p-8 md:p-12 mb-12 card-hover">
+            <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
+                <i class="fas fa-shield-alt text-soft-red mr-3"></i>
+                Säker och transparent donation
+            </h3>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="inline-block p-4 bg-gradient-to-br from-green-500 to-green-600 rounded-full mb-4 animate-pulse-soft">
+                        <i class="fas fa-lock text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">100% Säkert</h4>
+                    <p class="text-gray-600">Alla transaktioner är krypterade och säkra</p>
+                </div>
+                
+                <div class="text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="inline-block p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mb-4 animate-pulse-soft" style="animation-delay: 0.2s;">
+                        <i class="fas fa-eye text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Transparent</h4>
+                    <p class="text-gray-600">Full insyn i hur donationerna används</p>
+                </div>
+                
+                <div class="text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="inline-block p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full mb-4 animate-pulse-soft" style="animation-delay: 0.4s;">
+                        <i class="fas fa-heart text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Direkt hjälp</h4>
+                    <p class="text-gray-600">100% av donationen går till behövande</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white py-12 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-soft-red rounded-full animate-float"></div>
+            <div class="absolute top-32 right-20 w-16 h-16 bg-gold rounded-full animate-bounce-gentle"></div>
+            <div class="absolute bottom-20 left-1/3 w-12 h-12 bg-soft-red rounded-full animate-pulse-soft"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="mb-8">
+                <h4 class="text-2xl font-bold mb-4 text-gradient">Kontakt</h4>
+                <p class="text-gray-300 text-lg">
+                    <i class="fas fa-envelope mr-3 text-soft-red"></i>
+                    info@gazadonation.se
+                </p>
+                <p class="text-gray-300 text-lg mt-2">
+                    <i class="fas fa-phone mr-3 text-soft-red"></i>
+                    070 461 15 57
+                </p>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8">
+                <p class="text-lg text-gray-300 mb-4">
+                    <i class="fas fa-heart text-soft-red mr-2 animate-heart-beat"></i>
+                    Detta är en ideell insamling, alla medel går till hjälp.
+                </p>
+                <p class="text-sm text-gray-500">
+                    © 2024 Gaza Donation Initiative. Alla rättigheter förbehållna.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Toast Notification -->
+    <div id="toast" class="fixed top-4 right-4 transform translate-x-full transition-all duration-500 z-50">
+        <div class="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3">
+            <i id="toastIcon" class="fas fa-check-circle text-xl animate-pulse-soft"></i>
+            <span id="toastMessage" class="font-semibold"></span>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-gradient-to-br from-warm-beige to-light-beige flex items-center justify-center z-50">
+        <div class="text-center">
+            <div class="inline-block p-6 bg-white rounded-full shadow-2xl mb-6 animate-pulse-soft">
+                <i class="fas fa-heart text-4xl text-soft-red animate-heart-beat"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Laddar...</h2>
+            <p class="text-gray-600">Förbereder din donationssida</p>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced JavaScript with more animations and interactions
+        
+        // Loading animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+
+            });
+        }, observerOptions);
+
+        // Observe all elements with observer-element class
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerElements = document.querySelectorAll('.observer-element');
+            observerElements.forEach(el => observer.observe(el));
+        });
+
+        // Enhanced custom amount handling
+        document.getElementById('amount').addEventListener('change', function() {
+            const customAmountDiv = document.getElementById('customAmount');
+            if (this.value === 'custom') {
+                customAmountDiv.classList.remove('hidden');
+                customAmountDiv.style.animation = 'slideUp 0.5s ease-out';
+            } else {
+                customAmountDiv.classList.add('hidden');
+            }
+        });
+
+        // Enhanced QR Code generation with animations
+        function generateQR() {
+            const amountSelect = document.getElementById('amount');
+            const customAmountInput = document.getElementById('customAmountInput');
+            let amount;
+
+            if (amountSelect.value === 'custom') {
+                amount = customAmountInput.value;
+                if (!amount || amount < 100) {
+                    showToast('Vänligen ange ett belopp på minst 100 kr', 'error');
+                    return;
+                }
+            } else {
+                amount = amountSelect.value;
+            }
+
+            // Add loading state to button
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Genererar QR-kod...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                const phoneNumber = '46704611557';
+                const message = 'Donation Gaza';
+                const qrData = `C+${phoneNumber};${amount};${message};Gaza`;
+                const encodedData = encodeURIComponent(qrData);
+                
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodedData}&format=png&margin=20&ecc=M&bgcolor=FFFFFF&color=000000`;
+                
+                document.getElementById('qrCode').src = qrUrl;
+                document.getElementById('selectedAmount').textContent = amount + ' kr';
+                
+                const qrSection = document.getElementById('qrSection');
+                qrSection.classList.remove('hidden');
+                qrSection.style.animation = 'slideUp 0.8s ease-out';
+                
+                // Restore button
+                button.innerHTML = originalText;
+                button.disabled = false;
+                
+                showToast('QR-kod genererad! Scanna med din Swish-app', 'success');
+                
+                // Scroll to QR code smoothly
+                qrSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1500);
+        }
+
+        // Enhanced IBAN copy function
+        function copyIBAN() {
+            const iban = 'LT51 3250 0230 2205 1319';
+            const button = event.target;
+            const originalText = button.innerHTML;
+            
+            navigator.clipboard.writeText(iban).then(function() {
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Kopierat!';
+                button.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('bg-green-500');
+                }, 2000);
+                
+                showToast('IBAN kopierat till urklipp!', 'success');
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = iban;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Kopierat!';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 2000);
+                
+                showToast('IBAN kopierat till urklipp!', 'success');
+            });
+        }
+
+        // Enhanced toast notification system
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            toastMessage.textContent = message;
+            
+            if (type === 'error') {
+                toast.querySelector('div').className = 'bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3';
+                toastIcon.className = 'fas fa-exclamation-circle text-xl animate-pulse-soft';
+            } else {
+                toast.querySelector('div').className = 'bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3';
+                toastIcon.className = 'fas fa-check-circle text-xl animate-pulse-soft';
+            }
+            
+            // Show toast with animation
+            toast.classList.remove('translate-x-full');
+            toast.classList.add('animate-slide-in-right');
+            
+            // Add shake effect for errors
+            if (type === 'error') {
+                toast.style.animation = 'shake 0.5s ease-in-out';
+            }
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                toast.classList.remove('animate-slide-in-right');
+            }, 4000);
+        }
+
+        // Parallax effect for background elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-heart');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        // Add floating hearts dynamically
+        function createFloatingHeart() {
+            const heart = document.createElement('i');
+            heart.className = 'floating-heart fas fa-heart';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            
+            document.querySelector('.floating-hearts').appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, 8000);
+        }
+
+        // Create floating hearts periodically
+        setInterval(createFloatingHeart, 3000);
+
+        // Enhanced hover effects for cards
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.15)';
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            button {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Add mouse trail effect
+        let mouseTrail = [];
+        document.addEventListener('mousemove', function(e) {
+            mouseTrail.push({x: e.clientX, y: e.clientY, time: Date.now()});
+            
+            // Limit trail length
+            if (mouseTrail.length > 20) {
+                mouseTrail.shift();
+            }
+            
+            // Remove old trail points
+            mouseTrail = mouseTrail.filter(point => Date.now() - point.time < 1000);
+        });
+
+        // Keyboard navigation enhancements
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName === 'SELECT') {
+                e.target.click();
+            }
+        });
+
+        // Add focus indicators for accessibility
+        document.querySelectorAll('button, select, input').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.outline = '3px solid rgba(212, 117, 107, 0.5)';
+                this.style.outlineOffset = '2px';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.outline = 'none';
+            });
+        });
+
+        // Performance optimization: Debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Add celebration animation when QR is generated
+        function celebrate() {
+            const colors = ['#D4756B', '#C65D51', '#D4AF37'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-10px';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.animation = 'confetti-fall 3s linear forwards';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 50);
+            }
+        }
+
+        // Add confetti animation CSS
+        const confettiStyle = document.createElement('style');
+        confettiStyle.textContent = `
+            @keyframes confetti-fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(confettiStyle);
+
+        // Trigger celebration when QR is generated
+        const originalGenerateQR = generateQR;
+        generateQR = function() {
+            originalGenerateQR();
+            setTimeout(celebrate, 1000);
+        };
+
+        console.log('🎉 Gaza Donation Page loaded successfully! 🎉');
+    </script>
+</body>
+</html>
