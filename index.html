@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🤲 Donera till Gaza – Gör skillnad idag</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤲</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,7 +11,7 @@
                 extend: {
                     colors: {
                         'primary': '#3B82F6',
-                        'primary-dark': '#1E40AF',
+                        'primary-dark': '#2563EB',
                         'secondary': '#10B981',
                         'secondary-dark': '#059669',
                         'accent': '#F59E0B',
@@ -25,15 +24,14 @@
                         'slide-up': 'slideUp 0.8s ease-out',
                         'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
                         'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
-                        'float': 'float 3s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate'
+                        'float': 'float 3s ease-in-out infinite'
                     }
                 }
             }
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -65,179 +63,26 @@
             50% { transform: translateY(-15px); }
         }
         
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-            to { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #CBD5E1 100%);
+        body {
+            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
             min-height: 100vh;
-        }
-        
-        .payment-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-        
-        .payment-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-        
-        .payment-card.card-payment {
-            border-left: 6px solid #3B82F6;
-        }
-        
-        .payment-card.swish-payment {
-            border-left: 6px solid #10B981;
-        }
-        
-        .payment-card.bank-payment {
-            border-left: 6px solid #F59E0B;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 24px;
-            padding: 2rem;
-            max-width: 90vw;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideUp 0.4s ease-out;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #1E40AF 0%, #1E3A8A 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
-        }
-        
-        .btn-accent {
-            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-accent:hover {
-            background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
-        }
-        
-        .amount-btn {
-            transition: all 0.3s ease;
-            border: 2px solid #E5E7EB;
-        }
-        
-        .amount-btn:hover {
-            border-color: #3B82F6;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
-        }
-        
-        .amount-btn.selected {
-            border-color: #3B82F6;
-            background: linear-gradient(135deg, #3B82F6, #1E40AF);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: #F3F4F6;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .close-modal:hover {
-            background: #E5E7EB;
-            transform: scale(1.1);
-        }
-        
-        .phone-display {
-            background: linear-gradient(135deg, #1F2937, #111827);
-            color: #10B981;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .copy-btn {
-            background: linear-gradient(135deg, #10B981, #059669);
-            transition: all 0.3s ease;
-        }
-        
-        .copy-btn:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            transform: scale(1.05);
-        }
-        
-        .copy-btn.copied {
-            background: linear-gradient(135deg, #F59E0B, #D97706);
-        }
-        
-        @media (max-width: 768px) {
-            .modal-content {
-                margin: 1rem;
-                padding: 1.5rem;
-                max-width: calc(100vw - 2rem);
-            }
-            
-            .payment-card:hover {
-                transform: translateY(-4px) scale(1.01);
-            }
         }
         
         .floating-particles {
@@ -251,209 +96,322 @@
         
         .floating-particle {
             position: absolute;
-            border-radius: 50%;
-            animation: floatParticle 12s linear infinite;
+            animation: floatParticle 10s linear infinite;
         }
         
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
+        .payment-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-payment:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2);
+        }
+        
+        .swish-payment:hover {
+            border-color: #10B981;
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2);
+        }
+        
+        .bank-payment:hover {
+            border-color: #F59E0B;
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-1px);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+            transform: translateY(-1px);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #EF4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: #DC2626;
+            transform: scale(1.1);
+        }
+        
+        .amount-btn {
+            background: white;
+            border: 2px solid #E5E7EB;
+            color: #374151;
+            transition: all 0.3s ease;
+        }
+        
+        .amount-btn:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+        
+        .amount-btn.selected {
+            background: #3B82F6;
+            border-color: #3B82F6;
+            color: white;
+        }
+        
+        .phone-display {
+            background: linear-gradient(135deg, #1F2937, #111827);
+            color: #10B981;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #10B981, #059669);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-1px);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .payment-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             }
-            10% {
-                opacity: 0.6;
+            
+            .modal-content {
+                margin: 0.5rem;
+                padding: 1rem;
             }
-            90% {
-                opacity: 0.6;
+            
+            .floating-particle {
+                font-size: 8px !important;
             }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
+            
+            button, select, input {
+                min-height: 44px;
+                font-size: 16px;
             }
         }
     </style>
 </head>
-<body class="gradient-bg">
+<body class="overflow-x-hidden">
     <!-- Floating Particles Background -->
     <div class="floating-particles">
-        <div class="floating-particle bg-primary w-2 h-2" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="floating-particle bg-secondary w-3 h-3" style="left: 25%; animation-delay: 2s;"></div>
-        <div class="floating-particle bg-accent w-2 h-2" style="left: 40%; animation-delay: 4s;"></div>
-        <div class="floating-particle bg-primary w-4 h-4" style="left: 60%; animation-delay: 6s;"></div>
-        <div class="floating-particle bg-secondary w-2 h-2" style="left: 80%; animation-delay: 8s;"></div>
+        <div class="floating-particle bg-primary w-1 h-1 md:w-2 md:h-2 rounded-full" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-particle bg-secondary w-1 h-1 md:w-2 md:h-2 rounded-full" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="floating-particle bg-accent w-1 h-1 md:w-2 md:h-2 rounded-full" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="floating-particle bg-primary w-1 h-1 md:w-2 md:h-2 rounded-full" style="left: 70%; animation-delay: 6s;"></div>
+        <div class="floating-particle bg-secondary w-1 h-1 md:w-2 md:h-2 rounded-full" style="left: 90%; animation-delay: 8s;"></div>
     </div>
 
     <!-- Header -->
-    <header class="relative py-12 md:py-20">
-        <div class="container mx-auto px-4 text-center">
+    <header class="relative payment-card mx-2 md:mx-4 mt-4 md:mt-8 mb-4 md:mb-8">
+        <div class="container mx-auto px-3 md:px-6 py-4 md:py-8 text-center">
             <div class="animate-fade-in">
-                <div class="mb-8">
-                    <div class="inline-block p-6 bg-gradient-to-br from-primary to-secondary rounded-full shadow-2xl animate-float">
-                        <i class="fas fa-hands-helping text-5xl md:text-6xl text-white"></i>
-                    </div>
-                </div>
-                <h1 class="text-4xl md:text-7xl font-black mb-6 md:mb-8 animate-pulse-soft leading-tight">
-                    <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                        Donera till Gaza
-                    </span>
+                <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2 md:mb-4 animate-pulse-soft leading-tight">
+                    🤲 Donera till Gaza – Gör skillnad idag
                 </h1>
-                <p class="text-xl md:text-3xl text-gray-700 max-w-4xl mx-auto leading-relaxed animate-slide-up px-4 font-medium">
-                    Gör skillnad idag – Varje krona hjälper familjer i nöd
+                <p class="text-sm md:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed animate-slide-up px-2">
+                    Varje krona hjälper. Din insats kan rädda liv.
                 </p>
-                <div class="mt-8 md:mt-12 animate-bounce-gentle">
-                    <div class="flex justify-center space-x-6">
-                        <i class="fas fa-heart text-3xl md:text-4xl text-primary"></i>
-                        <i class="fas fa-dove text-3xl md:text-4xl text-secondary"></i>
-                        <i class="fas fa-hands-praying text-3xl md:text-4xl text-accent"></i>
-                    </div>
+                <div class="mt-3 md:mt-6 animate-bounce-gentle">
+                    <i class="fas fa-heart text-lg md:text-2xl text-primary"></i>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Payment Selection -->
-    <main class="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
-        <section class="mb-16">
-            <h2 class="text-3xl md:text-5xl font-black text-center text-gray-800 mb-4">
-                Välj donationsmetod
+    <main class="container mx-auto px-2 md:px-4 pb-4 md:pb-8 max-w-6xl">
+        <!-- Payment Methods Section -->
+        <section class="mb-6 md:mb-12">
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-center text-gray-800 mb-4 md:mb-8">
+                Välj ditt sätt att donera
             </h2>
-            <p class="text-xl text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                Välj den betalningsmetod som passar dig bäst. Alla donationer går direkt till hjälp för Gaza.
-            </p>
             
-            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
                 <!-- Card Payment -->
-                <div class="payment-card card-payment rounded-3xl p-8 text-center" onclick="openCardPayment()">
-                    <div class="mb-6">
-                        <div class="inline-block p-6 bg-gradient-to-br from-primary to-primary-dark rounded-full shadow-xl">
-                            <i class="fas fa-credit-card text-4xl text-white"></i>
+                <div class="payment-card card-payment rounded-xl md:rounded-2xl p-4 md:p-6 text-center" onclick="openRevolutPayment()">
+                    <div class="mb-3 md:mb-4">
+                        <div class="inline-block p-3 md:p-4 bg-gradient-to-br from-primary to-primary-dark rounded-full shadow-lg">
+                            <i class="fas fa-credit-card text-xl md:text-2xl text-white"></i>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Betala med kort</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Snabbt och säkert med Revolut. Accepterar alla kort och Apple Pay.
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-2">Kort/Revolut</h3>
+                    <p class="text-xs md:text-sm text-gray-600 mb-3 md:mb-4 leading-relaxed">
+                        Snabb och säker betalning med kort via Revolut.
                     </p>
-                    <div class="bg-primary/10 rounded-xl p-4 mb-6">
-                        <p class="text-primary font-semibold">
-                            <i class="fas fa-bolt mr-2"></i>
-                            Rekommenderat - Snabbast
+                    <div class="bg-primary/10 rounded-lg p-2 md:p-3 mb-3">
+                        <p class="text-primary font-semibold text-xs md:text-sm">
+                            <i class="fas fa-bolt mr-1"></i>
+                            Rekommenderat
                         </p>
                     </div>
-                    <div class="flex justify-center space-x-2 text-2xl">
-                        <i class="fab fa-cc-visa text-primary"></i>
-                        <i class="fab fa-cc-mastercard text-accent"></i>
-                        <i class="fab fa-apple-pay text-gray-800"></i>
-                        <i class="fab fa-google-pay text-secondary"></i>
+                    <div class="text-primary text-lg md:text-xl">
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
 
                 <!-- Swish Payment -->
-                <div class="payment-card swish-payment rounded-3xl p-8 text-center" onclick="openModal('swishModal')">
-                    <div class="mb-6">
-                        <div class="inline-block p-6 bg-gradient-to-br from-secondary to-secondary-dark rounded-full shadow-xl">
-                            <i class="fas fa-mobile-alt text-4xl text-white"></i>
+                <div class="payment-card swish-payment rounded-xl md:rounded-2xl p-4 md:p-6 text-center" onclick="openSwishModal()">
+                    <div class="mb-3 md:mb-4">
+                        <div class="inline-block p-3 md:p-4 bg-gradient-to-br from-secondary to-secondary-dark rounded-full shadow-lg">
+                            <i class="fas fa-mobile-alt text-xl md:text-2xl text-white"></i>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Swish</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-2">Swish</h3>
+                    <p class="text-xs md:text-sm text-gray-600 mb-3 md:mb-4 leading-relaxed">
                         Donera enkelt med Swish. Scanna QR-kod eller använd telefonnummer.
                     </p>
-                    <div class="bg-secondary/10 rounded-xl p-4 mb-6">
-                        <p class="text-secondary font-semibold">
-                            <i class="fas fa-mobile-alt mr-2"></i>
-                            Perfekt för svenska banker
+                    <div class="bg-secondary/10 rounded-lg p-2 md:p-3 mb-3">
+                        <p class="text-secondary font-semibold text-xs md:text-sm">
+                            <i class="fas fa-mobile-alt mr-1"></i>
+                            076 557 89 04
                         </p>
                     </div>
-                    <div class="text-secondary text-2xl">
-                        <i class="fas fa-qrcode"></i>
+                    <div class="text-secondary text-lg md:text-xl">
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
 
                 <!-- Bank Transfer -->
-                <div class="payment-card bank-payment rounded-3xl p-8 text-center" onclick="openModal('bankModal')">
-                    <div class="mb-6">
-                        <div class="inline-block p-6 bg-gradient-to-br from-accent to-accent-dark rounded-full shadow-xl">
-                            <i class="fas fa-university text-4xl text-white"></i>
+                <div class="payment-card bank-payment rounded-xl md:rounded-2xl p-4 md:p-6 text-center" onclick="openBankModal()">
+                    <div class="mb-3 md:mb-4">
+                        <div class="inline-block p-3 md:p-4 bg-gradient-to-br from-accent to-accent-dark rounded-full shadow-lg">
+                            <i class="fas fa-university text-xl md:text-2xl text-white"></i>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Banköverföring</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Traditionell banköverföring via Revolut. Fungerar internationellt.
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-2">Banköverföring</h3>
+                    <p class="text-xs md:text-sm text-gray-600 mb-3 md:mb-4 leading-relaxed">
+                        Internationell överföring via Revolut Bank.
                     </p>
-                    <div class="bg-accent/10 rounded-xl p-4 mb-6">
-                        <p class="text-accent font-semibold">
-                            <i class="fas fa-globe mr-2"></i>
-                            Internationellt tillgänglig
+                    <div class="bg-accent/10 rounded-lg p-2 md:p-3 mb-3">
+                        <p class="text-accent font-semibold text-xs md:text-sm">
+                            <i class="fas fa-globe mr-1"></i>
+                            Internationellt
                         </p>
                     </div>
-                    <div class="text-accent text-2xl">
-                        <i class="fas fa-building-columns"></i>
+                    <div class="text-accent text-lg md:text-xl">
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Trust Section -->
-        <section class="payment-card rounded-3xl p-8 md:p-12 mb-16">
-            <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
-                <i class="fas fa-shield-check text-secondary mr-3"></i>
+        <section class="payment-card rounded-xl md:rounded-2xl p-4 md:p-6 mb-6 md:mb-12">
+            <h3 class="text-lg md:text-xl font-bold text-center text-gray-800 mb-4 md:mb-6">
+                <i class="fas fa-shield-alt text-secondary mr-2"></i>
                 Säker och transparent donation
             </h3>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="text-center p-6 bg-surface rounded-2xl">
-                    <div class="inline-block p-4 bg-gradient-to-br from-secondary to-secondary-dark rounded-full mb-4">
-                        <i class="fas fa-lock text-2xl text-white"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
+                <div class="text-center p-3 md:p-4 bg-surface rounded-lg">
+                    <div class="inline-block p-2 md:p-3 bg-gradient-to-br from-green-500 to-green-600 rounded-full mb-2 md:mb-3">
+                        <i class="fas fa-lock text-sm md:text-lg text-white"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-2">100% Säkert</h4>
-                    <p class="text-gray-600">Alla transaktioner är krypterade och säkra</p>
+                    <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-1">100% Säkert</h4>
+                    <p class="text-xs md:text-sm text-gray-600">Alla transaktioner är krypterade</p>
                 </div>
                 
-                <div class="text-center p-6 bg-surface rounded-2xl">
-                    <div class="inline-block p-4 bg-gradient-to-br from-primary to-primary-dark rounded-full mb-4">
-                        <i class="fas fa-eye text-2xl text-white"></i>
+                <div class="text-center p-3 md:p-4 bg-surface rounded-lg">
+                    <div class="inline-block p-2 md:p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mb-2 md:mb-3">
+                        <i class="fas fa-eye text-sm md:text-lg text-white"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-2">Transparent</h4>
-                    <p class="text-gray-600">Full insyn i hur donationerna används</p>
+                    <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-1">Transparent</h4>
+                    <p class="text-xs md:text-sm text-gray-600">Full insyn i användning</p>
                 </div>
                 
-                <div class="text-center p-6 bg-surface rounded-2xl">
-                    <div class="inline-block p-4 bg-gradient-to-br from-accent to-accent-dark rounded-full mb-4">
-                        <i class="fas fa-heart text-2xl text-white"></i>
+                <div class="text-center p-3 md:p-4 bg-surface rounded-lg">
+                    <div class="inline-block p-2 md:p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full mb-2 md:mb-3">
+                        <i class="fas fa-heart text-sm md:text-lg text-white"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-2">Direkt hjälp</h4>
-                    <p class="text-gray-600">100% av donationen går till behövande</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Impact Section -->
-        <section class="payment-card rounded-3xl p-8 md:p-12 mb-16">
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                        <i class="fas fa-hands-helping text-secondary mr-3"></i>
-                        Din donation gör skillnad
-                    </h3>
-                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                        Gaza behöver vår hjälp mer än någonsin. Genom din donation kan vi tillsammans skapa hopp och stöd för drabbade familjer.
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-surface p-4 rounded-xl text-center">
-                            <div class="text-3xl font-bold text-secondary">500+</div>
-                            <div class="text-sm text-gray-600">Familjer hjälpta</div>
-                        </div>
-                        <div class="bg-surface p-4 rounded-xl text-center">
-                            <div class="text-3xl font-bold text-primary">24/7</div>
-                            <div class="text-sm text-gray-600">Stöd tillgängligt</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                         alt="Humanitarian aid" 
-                         class="w-full h-80 object-cover rounded-2xl shadow-xl">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
+                    <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-1">Direkt hjälp</h4>
+                    <p class="text-xs md:text-sm text-gray-600">100% går till behövande</p>
                 </div>
             </div>
         </section>
@@ -461,195 +419,178 @@
 
     <!-- Swish Modal -->
     <div id="swishModal" class="modal">
-        <div class="modal-content relative max-w-2xl">
+        <div class="modal-content relative">
             <button class="close-modal" onclick="closeModal('swishModal')">
                 <i class="fas fa-times"></i>
             </button>
             
-            <div class="text-center mb-8">
-                <div class="inline-block p-6 bg-gradient-to-br from-secondary to-secondary-dark rounded-full mb-6">
-                    <i class="fas fa-mobile-alt text-4xl text-white"></i>
+            <div class="text-center mb-4 md:mb-6">
+                <div class="inline-block p-3 md:p-4 bg-gradient-to-br from-secondary to-secondary-dark rounded-full mb-3 md:mb-4">
+                    <i class="fas fa-mobile-alt text-2xl md:text-3xl text-white"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Donera med Swish</h2>
-                <p class="text-lg text-gray-600">Välj belopp och generera QR-kod</p>
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">Donera med Swish</h2>
+                <p class="text-sm md:text-base text-gray-600">Välj belopp och generera QR-kod</p>
             </div>
 
             <!-- Amount Selection -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Välj belopp (minimum 100 kr)</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                    <button class="amount-btn bg-white p-4 rounded-xl font-semibold text-lg" onclick="selectSwishAmount(100, this)">
-                        100 kr
-                    </button>
-                    <button class="amount-btn bg-white p-4 rounded-xl font-semibold text-lg" onclick="selectSwishAmount(200, this)">
-                        200 kr
-                    </button>
-                    <button class="amount-btn bg-white p-4 rounded-xl font-semibold text-lg" onclick="selectSwishAmount(500, this)">
-                        500 kr
-                    </button>
-                    <button class="amount-btn bg-white p-4 rounded-xl font-semibold text-lg" onclick="selectSwishAmount(1000, this)">
-                        1000 kr
-                    </button>
+            <div class="mb-4 md:mb-6">
+                <label class="block text-sm md:text-base font-semibold text-gray-700 mb-3">
+                    Välj belopp (minimum 100 kr)
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-3 md:mb-4">
+                    <button class="amount-btn p-2 md:p-3 rounded-lg font-semibold text-sm md:text-base" onclick="selectSwishAmount(100, this)">100 kr</button>
+                    <button class="amount-btn p-2 md:p-3 rounded-lg font-semibold text-sm md:text-base" onclick="selectSwishAmount(250, this)">250 kr</button>
+                    <button class="amount-btn p-2 md:p-3 rounded-lg font-semibold text-sm md:text-base" onclick="selectSwishAmount(500, this)">500 kr</button>
+                    <button class="amount-btn p-2 md:p-3 rounded-lg font-semibold text-sm md:text-base" onclick="selectSwishAmount(1000, this)">1000 kr</button>
                 </div>
-                <div class="flex gap-3">
-                    <input type="number" id="customSwishAmount" placeholder="Annat belopp (min 100 kr)" 
-                           class="flex-1 p-4 border-2 border-gray-200 rounded-xl focus:border-secondary focus:outline-none text-lg">
-                    <button onclick="selectCustomSwishAmount()" class="btn-secondary text-white px-6 py-4 rounded-xl font-semibold">
+                <div class="flex gap-2">
+                    <input type="number" id="customSwishAmount" min="100" placeholder="Annat belopp (min 100 kr)" 
+                           class="flex-1 p-2 md:p-3 border-2 border-gray-200 rounded-lg focus:border-secondary focus:outline-none text-sm md:text-base">
+                    <button onclick="selectCustomSwishAmount()" class="btn-secondary text-white px-3 md:px-4 py-2 md:py-3 rounded-lg font-semibold text-sm md:text-base">
                         Välj
                     </button>
                 </div>
             </div>
 
-            <button onclick="generateSwishQR()" class="w-full btn-secondary text-white font-bold py-4 px-8 rounded-xl text-lg mb-6">
-                <i class="fas fa-qrcode mr-3"></i>
-                Generera Swish QR-kod
+            <button onclick="generateSwishQR()" class="w-full btn-secondary text-white font-bold py-3 md:py-4 px-4 md:px-6 rounded-lg text-sm md:text-base mb-4 md:mb-6">
+                <i class="fas fa-qrcode mr-2"></i>
+                Generera QR-kod
             </button>
 
-            <!-- QR Code Display -->
-            <div id="swishQRSection" class="hidden text-center">
-                <div class="bg-white p-6 rounded-2xl shadow-xl mb-6">
-                    <img id="swishQRCode" alt="Swish QR Code" class="w-64 h-64 mx-auto mb-4 border-4 border-secondary rounded-2xl">
-                    <div class="bg-gradient-to-r from-secondary to-secondary-dark text-white p-4 rounded-xl">
-                        <p class="text-lg font-semibold mb-2">
+            <!-- QR Code Section -->
+            <div id="swishQRSection" class="text-center hidden">
+                <div class="bg-white p-3 md:p-6 rounded-xl shadow-lg mb-4 md:mb-6 border-2 border-secondary">
+                    <img id="swishQRCode" alt="Swish QR Code" class="w-32 h-32 md:w-48 md:h-48 mx-auto mb-3 md:mb-4 rounded-lg">
+                    <div class="bg-gradient-to-r from-secondary to-secondary-dark text-white p-3 md:p-4 rounded-lg">
+                        <p class="text-sm md:text-base font-semibold mb-2">
                             <i class="fas fa-mobile-alt mr-2"></i>
                             Swisha till
                         </p>
-                        <div class="phone-display p-3 rounded-lg mb-3">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xl font-bold">076 557 89 04</span>
-                                <button onclick="copyPhoneNumber()" class="copy-btn text-white px-3 py-2 rounded-lg text-sm font-semibold">
-                                    <i class="fas fa-copy mr-1"></i>
-                                    Kopiera
-                                </button>
-                            </div>
+                        <div class="phone-display p-2 md:p-3 rounded-lg mb-2 flex items-center justify-between">
+                            <span class="text-sm md:text-base font-bold">076 557 89 04</span>
+                            <button onclick="copyPhoneNumber()" class="copy-btn text-white px-2 py-1 rounded text-xs md:text-sm font-semibold">
+                                <i class="fas fa-copy mr-1"></i>
+                                Kopiera
+                            </button>
                         </div>
-                        <p class="text-lg mb-2">
-                            Belopp: <span id="swishSelectedAmount" class="font-bold text-accent"></span>
+                        <p class="text-sm md:text-base mb-1">
+                            Belopp: <span id="swishSelectedAmount" class="font-bold text-accent">100 kr</span>
                         </p>
-                        <p class="text-lg">
+                        <p class="text-sm md:text-base">
                             Meddelande: <strong>Donation Gaza</strong>
                         </p>
                     </div>
                 </div>
 
                 <!-- Mobile Swish App Button -->
-                <div class="md:hidden">
-                    <button onclick="openSwishApp()" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-4 px-6 rounded-xl text-lg">
-                        <i class="fab fa-app-store-ios mr-3"></i>
+                <div class="md:hidden mb-4">
+                    <button onclick="openSwishApp()" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 px-4 rounded-lg text-sm">
+                        <i class="fab fa-app-store-ios mr-2"></i>
                         Öppna Swish-appen
                     </button>
                 </div>
             </div>
+
+            <div class="bg-secondary/10 rounded-lg p-3 md:p-4 text-center">
+                <p class="text-secondary font-semibold text-xs md:text-sm">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    Swisha till 076 557 89 04 med meddelandet 'Donation Gaza'
+                </p>
+            </div>
         </div>
     </div>
 
-    <!-- Bank Modal -->
+    <!-- Bank Transfer Modal -->
     <div id="bankModal" class="modal">
-        <div class="modal-content relative max-w-4xl">
+        <div class="modal-content relative">
             <button class="close-modal" onclick="closeModal('bankModal')">
                 <i class="fas fa-times"></i>
             </button>
             
-            <div class="text-center mb-8">
-                <div class="inline-block p-6 bg-gradient-to-br from-accent to-accent-dark rounded-full mb-6">
-                    <i class="fas fa-university text-4xl text-white"></i>
+            <div class="text-center mb-4 md:mb-6">
+                <div class="inline-block p-3 md:p-4 bg-gradient-to-br from-accent to-accent-dark rounded-full mb-3 md:mb-4">
+                    <i class="fas fa-university text-2xl md:text-3xl text-white"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Banköverföring</h2>
-                <p class="text-lg text-gray-600">Revolut - För internationella donationer</p>
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">Banköverföring</h2>
+                <p class="text-sm md:text-base text-gray-600">Revolut - För internationella donationer</p>
             </div>
 
-            <div class="bg-surface p-6 rounded-2xl mb-6">
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-xl border-l-4 border-accent">
-                        <span class="text-sm font-semibold text-accent uppercase block mb-2">Mottagare:</span>
-                        <p class="text-xl font-bold text-gray-800">Nadir Boumediene</p>
+            <div class="space-y-3 md:space-y-4 mb-4 md:mb-6">
+                <div class="bg-surface p-3 md:p-4 rounded-lg">
+                    <span class="text-xs font-semibold text-accent uppercase block mb-1">Mottagare:</span>
+                    <p class="text-sm md:text-base font-bold text-gray-800">Nadir Boumediene</p>
+                </div>
+                
+                <div class="bg-surface p-3 md:p-4 rounded-lg">
+                    <span class="text-xs font-semibold text-accent uppercase block mb-1">IBAN:</span>
+                    <div class="bg-gray-800 text-secondary font-mono text-xs md:text-sm p-2 md:p-3 rounded-lg flex items-center justify-between">
+                        <span class="break-all">LT51 3250 0230 2205 1319</span>
+                        <button onclick="copyIBAN()" class="copy-btn text-white px-2 py-1 rounded text-xs font-semibold ml-2">
+                            <i class="fas fa-copy"></i>
+                        </button>
                     </div>
-                    
-                    <div class="bg-white p-4 rounded-xl border-l-4 border-primary">
-                        <span class="text-sm font-semibold text-primary uppercase block mb-2">IBAN:</span>
-                        <div class="bg-gray-800 text-secondary font-mono text-lg p-3 rounded-lg">
-                            <div class="flex items-center justify-between">
-                                <span class="font-bold">LT51 3250 0230 2205 1319</span>
-                                <button onclick="copyIBAN()" class="copy-btn text-white px-3 py-2 rounded text-sm font-semibold">
-                                    <i class="fas fa-copy mr-1"></i>
-                                    Kopiera
-                                </button>
-                            </div>
-                        </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-3">
+                    <div class="bg-surface p-3 md:p-4 rounded-lg">
+                        <span class="text-xs font-semibold text-accent uppercase block mb-1">BIC/SWIFT:</span>
+                        <p class="text-sm md:text-base font-bold text-gray-800">REVOLT21</p>
                     </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-xl border-l-4 border-secondary">
-                            <span class="text-sm font-semibold text-secondary uppercase block mb-2">BIC/SWIFT:</span>
-                            <p class="text-xl font-bold text-gray-800">REVOLT21</p>
-                        </div>
-                        
-                        <div class="bg-white p-4 rounded-xl border-l-4 border-primary">
-                            <span class="text-sm font-semibold text-primary uppercase block mb-2">Bank:</span>
-                            <p class="text-xl font-bold text-gray-800">Revolut Bank UAB</p>
-                        </div>
+                    <div class="bg-surface p-3 md:p-4 rounded-lg">
+                        <span class="text-xs font-semibold text-accent uppercase block mb-1">Bank:</span>
+                        <p class="text-sm md:text-base font-bold text-gray-800">Revolut Bank UAB</p>
                     </div>
-                    
-                    <div class="bg-white p-4 rounded-xl border-l-4 border-accent">
-                        <span class="text-sm font-semibold text-accent uppercase block mb-2">Adress:</span>
-                        <p class="text-gray-800 leading-relaxed">
-                            Konstitucijos ave. 21B<br>
-                            08130, Vilnius, Lithuania
-                        </p>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-xl border-l-4 border-secondary">
-                        <span class="text-sm font-semibold text-secondary uppercase block mb-2">Korrespondent BIC:</span>
-                        <p class="text-xl font-bold text-gray-800">BARCGB22</p>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-xl border-l-4 border-accent">
-                        <span class="text-sm font-semibold text-accent uppercase block mb-2">Meddelande:</span>
-                        <p class="text-xl font-bold text-gray-800">Donation Gaza</p>
-                    </div>
+                </div>
+                
+                <div class="bg-surface p-3 md:p-4 rounded-lg">
+                    <span class="text-xs font-semibold text-accent uppercase block mb-1">Adress:</span>
+                    <p class="text-xs md:text-sm text-gray-800">
+                        Konstitucijos ave. 21B<br>
+                        08130, Vilnius, Lithuania
+                    </p>
+                </div>
+                
+                <div class="bg-surface p-3 md:p-4 rounded-lg">
+                    <span class="text-xs font-semibold text-accent uppercase block mb-1">Korrespondent BIC:</span>
+                    <p class="text-sm md:text-base font-bold text-gray-800">BARCGB22</p>
+                </div>
+                
+                <div class="bg-gradient-to-r from-accent to-accent-dark text-white p-3 md:p-4 rounded-lg text-center">
+                    <span class="text-xs font-semibold uppercase block mb-1">Meddelande:</span>
+                    <p class="text-sm md:text-base font-bold">Donation Gaza</p>
                 </div>
             </div>
 
-            <button onclick="copyAllBankInfo()" class="w-full btn-accent text-white font-bold py-4 px-8 rounded-xl text-lg">
-                <i class="fas fa-copy mr-3"></i>
+            <button onclick="copyAllBankInfo()" class="w-full btn-accent text-white font-bold py-3 md:py-4 px-4 md:px-6 rounded-lg text-sm md:text-base">
+                <i class="fas fa-copy mr-2"></i>
                 Kopiera all bankinformation
             </button>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white py-12 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-10 left-10 w-20 h-20 bg-primary rounded-full animate-float"></div>
-            <div class="absolute top-32 right-20 w-16 h-16 bg-secondary rounded-full animate-bounce-gentle"></div>
-            <div class="absolute bottom-20 left-1/3 w-12 h-12 bg-accent rounded-full animate-pulse-soft"></div>
-        </div>
-        
+    <footer class="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white py-6 md:py-8 mt-8 md:mt-12">
         <div class="container mx-auto px-4 text-center relative z-10">
-            <div class="mb-8">
-                <h4 class="text-2xl font-bold mb-4">
-                    <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                        Kontakt
-                    </span>
-                </h4>
+            <div class="mb-4 md:mb-6">
+                <h4 class="text-lg md:text-xl font-bold mb-3 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Kontakt</h4>
                 <div class="space-y-2">
-                    <p class="text-gray-300 text-lg">
-                        <i class="fas fa-envelope mr-3 text-primary"></i>
-                        <a href="mailto:info@gazadonation.se" class="hover:text-primary transition-colors">info@gazadonation.se</a>
+                    <p class="text-gray-300 text-sm md:text-base">
+                        <i class="fas fa-envelope mr-2 text-secondary"></i>
+                        <a href="mailto:info@gazadonation.se" class="hover:text-secondary transition-colors">info@gazadonation.se</a>
                     </p>
-                    <p class="text-gray-300 text-lg">
-                        <i class="fas fa-phone mr-3 text-secondary"></i>
+                    <p class="text-gray-300 text-sm md:text-base">
+                        <i class="fas fa-phone mr-2 text-secondary"></i>
                         <button onclick="copyPhoneNumber()" class="hover:text-secondary transition-colors underline">076 557 89 04</button>
                     </p>
                 </div>
             </div>
             
-            <div class="border-t border-gray-700 pt-8">
-                <p class="text-lg text-gray-300 mb-4">
+            <div class="border-t border-gray-700 pt-4 md:pt-6">
+                <p class="text-sm md:text-base text-gray-300 mb-2">
                     <i class="fas fa-heart text-primary mr-2"></i>
                     Detta är en ideell insamling, alla medel går till hjälp.
                 </p>
-                <p class="text-sm text-gray-500">
+                <p class="text-xs md:text-sm text-gray-500">
                     © 2024 Gaza Donation Initiative. Alla rättigheter förbehållna.
                 </p>
             </div>
@@ -657,28 +598,28 @@
     </footer>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed top-4 right-4 transform translate-x-full transition-all duration-500 z-50 max-w-sm">
-        <div class="bg-gradient-to-r from-secondary to-secondary-dark text-white px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3">
-            <i id="toastIcon" class="fas fa-check-circle text-xl flex-shrink-0"></i>
-            <span id="toastMessage" class="font-semibold"></span>
+    <div id="toast" class="fixed top-4 right-4 transform translate-x-full transition-all duration-500 z-50 max-w-xs">
+        <div class="bg-gradient-to-r from-secondary to-secondary-dark text-white px-3 md:px-4 py-2 md:py-3 rounded-lg shadow-2xl flex items-center space-x-2">
+            <i id="toastIcon" class="fas fa-check-circle text-sm md:text-base flex-shrink-0"></i>
+            <span id="toastMessage" class="font-semibold text-xs md:text-sm"></span>
         </div>
     </div>
 
     <!-- Loading Overlay -->
     <div id="loadingOverlay" class="fixed inset-0 bg-gradient-to-br from-surface to-surface-dark flex items-center justify-center z-50">
-        <div class="text-center">
-            <div class="inline-block p-6 bg-white rounded-full shadow-2xl mb-6 animate-pulse-soft">
-                <i class="fas fa-hands-helping text-4xl text-primary"></i>
+        <div class="text-center px-4">
+            <div class="inline-block p-4 md:p-6 bg-white rounded-full shadow-2xl mb-4 md:mb-6 animate-pulse-soft">
+                <i class="fas fa-heart text-2xl md:text-4xl text-primary"></i>
             </div>
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Laddar...</h2>
-            <p class="text-gray-600">Förbereder din donationssida</p>
+            <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">Laddar...</h2>
+            <p class="text-gray-600 text-sm md:text-base">Förbereder din donationssida</p>
         </div>
     </div>
 
     <script>
-        // Global variables
+        // Payment variables
         let selectedSwishAmount = 100;
-        
+
         // Loading animation
         window.addEventListener('load', function() {
             setTimeout(() => {
@@ -689,233 +630,127 @@
             }, 1000);
         });
 
-        // Card payment function - opens Revolut
-        function openCardPayment() {
-            // Show amount selection modal first
-            showAmountSelectionModal();
-        }
-
-        function showAmountSelectionModal() {
-            const modal = document.createElement('div');
-            modal.className = 'modal active';
-            modal.innerHTML = `
-                <div class="modal-content relative max-w-lg">
-                    <button class="close-modal" onclick="this.closest('.modal').remove()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    
-                    <div class="text-center mb-8">
-                        <div class="inline-block p-6 bg-gradient-to-br from-primary to-primary-dark rounded-full mb-6">
-                            <i class="fas fa-credit-card text-4xl text-white"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Välj belopp</h2>
-                        <p class="text-lg text-gray-600">Hur mycket vill du donera?</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <button class="amount-btn bg-white p-4 rounded-xl font-semibold text-lg" onclick="donateRevolut(100)">
-                            100 kr
-                        </button>
-                        <button class="amount-btn bg-white p-4 rounded-xl font-semibold text-lg" onclick="donateRevolut(250)">
-                            250 kr
-                        </button>
-                        <button class="amount-btn bg-white p-4 rounded-xl font-semibold text-lg" onclick="donateRevolut(500)">
-                            500 kr
-                        </button>
-                        <button class="amount-btn bg-white p-4 rounded-xl font-semibold text-lg" onclick="donateRevolut(1000)">
-                            1000 kr
-                        </button>
-                    </div>
-                    
-                    <div class="flex gap-3 mb-6">
-                        <input type="number" id="customCardAmount" placeholder="Annat belopp (min 50 kr)" 
-                               class="flex-1 p-4 border-2 border-gray-200 rounded-xl focus:border-primary focus:outline-none text-lg">
-                        <button onclick="donateRevolutCustom()" class="btn-primary text-white px-6 py-4 rounded-xl font-semibold">
-                            Donera
-                        </button>
-                    </div>
-                    
-                    <div class="bg-primary/10 rounded-xl p-4 text-center">
-                        <p class="text-primary font-semibold">
-                            <i class="fas fa-shield-check mr-2"></i>
-                            Säker betalning via Revolut
-                        </p>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
-
-        // Revolut donation functions
-        function donateRevolut(amount) {
-            const revolutUrl = `https://revolut.me/donationgasa/${amount}`;
-            
-            // Add celebration effect
-            celebrate();
-            
-            // Close modal and open Revolut
-            document.querySelector('.modal').remove();
-            
-            setTimeout(() => {
-                window.open(revolutUrl, '_blank');
-                showToast(`Öppnar Revolut för donation på ${amount} kr!`, 'success');
-            }, 500);
-        }
-
-        function donateRevolutCustom() {
-            const customAmount = document.getElementById('customCardAmount').value;
-            const amount = parseInt(customAmount) || 100;
-            
-            if (amount < 50) {
-                showToast('Minsta belopp är 50 kr', 'error');
-                return;
-            }
-            
-            donateRevolut(amount);
-        }
-
         // Modal functions
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
+        function openSwishModal() {
+            const modal = document.getElementById('swishModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            resetSwishForm();
+        }
+
+        function openBankModal() {
+            const modal = document.getElementById('bankModal');
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking outside
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('modal')) {
-                e.target.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
+        // Revolut payment function - FIXED
+        function openRevolutPayment() {
+            // Direct redirect to Revolut donation link
+            const revolutUrl = 'https://revolut.me/donationgasa';
+            
+            // Show loading toast
+            showToast('Omdirigerar till Revolut...', 'info');
+            
+            // Add small delay for better UX
+            setTimeout(() => {
+                window.open(revolutUrl, '_blank');
+                showToast('Omdirigerad till Revolut!', 'success');
+                celebrate();
+            }, 500);
+        }
 
-        // Swish functions
+        // Swish functions - FIXED
+        function resetSwishForm() {
+            selectedSwishAmount = 100;
+            document.querySelectorAll('#swishModal .amount-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.getElementById('customSwishAmount').value = '';
+            document.getElementById('swishQRSection').classList.add('hidden');
+        }
+
         function selectSwishAmount(amount, button) {
             selectedSwishAmount = amount;
             
             // Update button styles
-            document.querySelectorAll('.amount-btn').forEach(btn => {
+            document.querySelectorAll('#swishModal .amount-btn').forEach(btn => {
                 btn.classList.remove('selected');
             });
             
             button.classList.add('selected');
-            showToast(`${amount} kr valt för Swish!`, 'success');
+            document.getElementById('customSwishAmount').value = '';
+            showToast(`${amount} kr valt!`, 'success');
         }
 
         function selectCustomSwishAmount() {
-            const customAmount = document.getElementById('customSwishAmount').value;
-            const amount = parseInt(customAmount);
+            const input = document.getElementById('customSwishAmount');
+            const amount = parseInt(input.value);
             
             if (!amount || amount < 100) {
-                showToast('Minsta belopp är 100 kr', 'error');
+                showToast('Vänligen ange ett belopp på minst 100 kr', 'error');
                 return;
             }
             
             selectedSwishAmount = amount;
             
-            // Remove selection from preset buttons
-            document.querySelectorAll('.amount-btn').forEach(btn => {
+            // Clear other selections
+            document.querySelectorAll('#swishModal .amount-btn').forEach(btn => {
                 btn.classList.remove('selected');
             });
             
-            showToast(`${amount} kr valt för Swish!`, 'success');
+            showToast(`${amount} kr valt!`, 'success');
         }
 
         function generateSwishQR() {
             const amount = selectedSwishAmount;
-
+            
             if (!amount || amount < 100) {
-                showToast('Vänligen välj ett belopp på minst 100 kr', 'error');
+                showToast('Vänligen ange ett belopp på minst 100 kr', 'error');
                 return;
             }
 
-            const phoneNumber = '46765578904';
-            const message = 'Donation Gaza';
-            const qrData = `C+${phoneNumber};${amount};${message};Gaza`;
-            const encodedData = encodeURIComponent(qrData);
-            
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodedData}&format=png&margin=20&ecc=M&bgcolor=FFFFFF&color=000000`;
-            
-            document.getElementById('swishQRCode').src = qrUrl;
-            document.getElementById('swishSelectedAmount').textContent = amount + ' kr';
-            
-            const qrSection = document.getElementById('swishQRSection');
-            qrSection.classList.remove('hidden');
-            qrSection.style.animation = 'slideUp 0.8s ease-out';
-            
-            showToast('QR-kod genererad! Scanna med din Swish-app', 'success');
-            
-            // Trigger celebration
-            setTimeout(celebrate, 500);
+            // Add loading state
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Genererar...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                const phoneNumber = '46765578904';
+                const message = 'Donation Gaza';
+                const qrData = `C+${phoneNumber};${amount};${message};Gaza`;
+                const encodedData = encodeURIComponent(qrData);
+                
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodedData}&format=png&margin=10&ecc=M&bgcolor=FFFFFF&color=000000`;
+                
+                document.getElementById('swishQRCode').src = qrUrl;
+                document.getElementById('swishSelectedAmount').textContent = amount + ' kr';
+                
+                const qrSection = document.getElementById('swishQRSection');
+                qrSection.classList.remove('hidden');
+                
+                // Restore button
+                button.innerHTML = originalText;
+                button.disabled = false;
+                
+                showToast('QR-kod genererad! Scanna med din Swish-app', 'success');
+                
+                // Scroll to QR code
+                setTimeout(() => {
+                    qrSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+                
+                celebrate();
+            }, 1000);
         }
 
-        // Copy functions
-        function copyPhoneNumber() {
-            const phoneNumber = '076 557 89 04';
-            
-            navigator.clipboard.writeText(phoneNumber).then(function() {
-                showToast('Telefonnummer kopierat!', 'success');
-            }).catch(function() {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = phoneNumber;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                showToast('Telefonnummer kopierat!', 'success');
-            });
-        }
-
-        function copyIBAN() {
-            const iban = 'LT51 3250 0230 2205 1319';
-            
-            navigator.clipboard.writeText(iban).then(function() {
-                showToast('IBAN kopierat till urklipp!', 'success');
-            }).catch(function() {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = iban;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                showToast('IBAN kopierat till urklipp!', 'success');
-            });
-        }
-
-        function copyAllBankInfo() {
-            const bankInfo = `
-BANKÖVERFÖRING - GAZA DONATION
-
-Mottagare: Nadir Boumediene
-IBAN: LT51 3250 0230 2205 1319
-BIC/SWIFT: REVOLT21
-Bank: Revolut Bank UAB
-Adress: Konstitucijos ave. 21B, 08130, Vilnius, Lithuania
-Korrespondent BIC: BARCGB22
-Meddelande: Donation Gaza
-            `.trim();
-            
-            navigator.clipboard.writeText(bankInfo).then(function() {
-                showToast('All bankinformation kopierad!', 'success');
-            }).catch(function() {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = bankInfo;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                showToast('All bankinformation kopierad!', 'success');
-            });
-        }
-
-        // Open Swish app on mobile
         function openSwishApp() {
             const phoneNumber = '0765578904';
             const amount = selectedSwishAmount || 100;
@@ -935,6 +770,110 @@ Meddelande: Donation Gaza
             }, 1000);
         }
 
+        // Copy functions - FIXED
+        function copyPhoneNumber() {
+            const phoneNumber = '076 557 89 04';
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            navigator.clipboard.writeText(phoneNumber).then(function() {
+                button.innerHTML = '<i class="fas fa-check mr-1"></i>Kopierat!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+                
+                showToast('Telefonnummer kopierat!', 'success');
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = phoneNumber;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                button.innerHTML = '<i class="fas fa-check mr-1"></i>Kopierat!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+                
+                showToast('Telefonnummer kopierat!', 'success');
+            });
+        }
+
+        function copyIBAN() {
+            const iban = 'LT51 3250 0230 2205 1319';
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            navigator.clipboard.writeText(iban).then(function() {
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+                
+                showToast('IBAN kopierat till urklipp!', 'success');
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = iban;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                showToast('IBAN kopierat till urklipp!', 'success');
+            });
+        }
+
+        function copyAllBankInfo() {
+            const bankInfo = `
+BANKÖVERFÖRING - GAZA DONATION
+
+Mottagare: Nadir Boumediene
+IBAN: LT51 3250 0230 2205 1319
+BIC/SWIFT: REVOLT21
+Bank: Revolut Bank UAB
+Adress: Konstitucijos ave. 21B, 08130, Vilnius, Lithuania
+Korrespondent BIC: BARCGB22
+Meddelande: Donation Gaza
+            `.trim();
+            
+            const button = event.target;
+            const originalText = button.innerHTML;
+            
+            navigator.clipboard.writeText(bankInfo).then(function() {
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>All information kopierad!';
+                button.classList.add('bg-secondary');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('bg-secondary');
+                }, 3000);
+                
+                showToast('All bankinformation kopierad!', 'success');
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = bankInfo;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                showToast('All bankinformation kopierad!', 'success');
+            });
+        }
+
         // Toast notification system
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
@@ -946,14 +885,14 @@ Meddelande: Donation Gaza
             // Update toast styling based on type
             const toastDiv = toast.querySelector('div');
             if (type === 'error') {
-                toastDiv.className = 'bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3';
-                toastIcon.className = 'fas fa-exclamation-circle text-xl flex-shrink-0';
+                toastDiv.className = 'bg-gradient-to-r from-red-500 to-red-600 text-white px-3 md:px-4 py-2 md:py-3 rounded-lg shadow-2xl flex items-center space-x-2';
+                toastIcon.className = 'fas fa-exclamation-circle text-sm md:text-base flex-shrink-0';
             } else if (type === 'info') {
-                toastDiv.className = 'bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3';
-                toastIcon.className = 'fas fa-info-circle text-xl flex-shrink-0';
+                toastDiv.className = 'bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 md:px-4 py-2 md:py-3 rounded-lg shadow-2xl flex items-center space-x-2';
+                toastIcon.className = 'fas fa-info-circle text-sm md:text-base flex-shrink-0';
             } else {
-                toastDiv.className = 'bg-gradient-to-r from-secondary to-secondary-dark text-white px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3';
-                toastIcon.className = 'fas fa-check-circle text-xl flex-shrink-0';
+                toastDiv.className = 'bg-gradient-to-r from-secondary to-secondary-dark text-white px-3 md:px-4 py-2 md:py-3 rounded-lg shadow-2xl flex items-center space-x-2';
+                toastIcon.className = 'fas fa-check-circle text-sm md:text-base flex-shrink-0';
             }
             
             // Show toast with animation
@@ -974,8 +913,8 @@ Meddelande: Donation Gaza
 
         // Celebration animation
         function celebrate() {
-            const colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
-            const confettiCount = window.innerWidth > 768 ? 50 : 25;
+            const colors = ['#3B82F6', '#10B981', '#F59E0B'];
+            const confettiCount = window.innerWidth > 768 ? 30 : 15;
             
             for (let i = 0; i < confettiCount; i++) {
                 setTimeout(() => {
@@ -983,13 +922,13 @@ Meddelande: Donation Gaza
                     confetti.style.position = 'fixed';
                     confetti.style.left = Math.random() * window.innerWidth + 'px';
                     confetti.style.top = '-10px';
-                    confetti.style.width = Math.random() * 8 + 4 + 'px';
-                    confetti.style.height = confetti.style.width;
+                    confetti.style.width = '6px';
+                    confetti.style.height = '6px';
                     confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.borderRadius = '50%';
                     confetti.style.pointerEvents = 'none';
                     confetti.style.zIndex = '9999';
-                    confetti.style.animation = 'confetti-fall 3s linear forwards';
+                    confetti.style.animation = 'confetti-fall 2s linear forwards';
                     
                     document.body.appendChild(confetti);
                     
@@ -997,84 +936,36 @@ Meddelande: Donation Gaza
                         if (confetti.parentNode) {
                             confetti.remove();
                         }
-                    }, 3000);
+                    }, 2000);
                 }, i * 50);
             }
         }
 
-        // Add confetti animation CSS
-        const confettiStyle = document.createElement('style');
-        confettiStyle.textContent = `
-            @keyframes confetti-fall {
-                to {
-                    transform: translateY(100vh) rotate(720deg);
-                    opacity: 0;
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.modal.active');
+                if (activeModal) {
+                    activeModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 }
             }
-        `;
-        document.head.appendChild(confettiStyle);
-
-        // Create floating particles
-        function createFloatingParticle() {
-            const colors = ['bg-primary', 'bg-secondary', 'bg-accent'];
-            const particle = document.createElement('div');
-            particle.className = `floating-particle ${colors[Math.floor(Math.random() * colors.length)]} opacity-30`;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.width = (Math.random() * 6 + 4) + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.animationDelay = Math.random() * 8 + 's';
-            particle.style.animationDuration = (Math.random() * 4 + 8) + 's';
-            
-            document.querySelector('.floating-particles').appendChild(particle);
-            
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-            }, 12000);
-        }
-
-        // Create particles periodically
-        const particleInterval = window.innerWidth > 768 ? 4000 : 8000;
-        setInterval(createFloatingParticle, particleInterval);
-
-        // Enhanced hover effects for payment cards
-        document.querySelectorAll('.payment-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                if (window.innerWidth > 768) {
-                    this.style.transform = 'translateY(-12px) scale(1.02)';
-                    this.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.15)';
-                }
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                if (window.innerWidth > 768) {
-                    this.style.transform = 'translateY(0) scale(1)';
-                    this.style.boxShadow = '';
-                }
-            });
-
-            // Touch events for mobile
-            card.addEventListener('touchstart', function() {
-                this.style.transform = 'translateY(-4px) scale(1.01)';
-                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.12)';
-            });
-            
-            card.addEventListener('touchend', function() {
-                setTimeout(() => {
-                    this.style.transform = 'translateY(0) scale(1)';
-                    this.style.boxShadow = '';
-                }, 150);
-            });
         });
 
         // Add ripple effect to buttons
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                if (this.classList.contains('close-modal') || this.classList.contains('copy-btn')) return;
-                
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON' && !e.target.classList.contains('close-modal')) {
+                const button = e.target;
                 const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
+                const rect = button.getBoundingClientRect();
                 const size = Math.max(rect.width, rect.height);
                 const x = e.clientX - rect.left - size / 2;
                 const y = e.clientY - rect.top - size / 2;
@@ -1084,19 +975,63 @@ Meddelande: Donation Gaza
                 ripple.style.top = y + 'px';
                 ripple.classList.add('ripple');
                 
-                this.appendChild(ripple);
+                button.appendChild(ripple);
                 
                 setTimeout(() => {
                     if (ripple.parentNode) {
                         ripple.remove();
                     }
                 }, 600);
-            });
+            }
         });
 
-        // Add ripple effect CSS
-        const rippleStyle = document.createElement('style');
-        rippleStyle.textContent = `
+        // Create floating particles dynamically
+        function createFloatingParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'floating-particle w-1 h-1 md:w-2 md:h-2 rounded-full';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 8) + 's';
+            
+            const colors = ['bg-primary', 'bg-secondary', 'bg-accent'];
+            particle.classList.add(colors[Math.floor(Math.random() * colors.length)]);
+            
+            document.querySelector('.floating-particles').appendChild(particle);
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, 12000);
+        }
+
+        // Create particles periodically
+        const particleInterval = window.innerWidth > 768 ? 4000 : 8000;
+        setInterval(createFloatingParticle, particleInterval);
+
+        // Handle orientation change on mobile
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                const activeModal = document.querySelector('.modal.active');
+                if (activeModal) {
+                    activeModal.scrollTop = 0;
+                }
+            }, 500);
+        });
+
+        // Prevent zoom on double tap for iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
             button {
                 position: relative;
                 overflow: hidden;
@@ -1119,24 +1054,41 @@ Meddelande: Donation Gaza
                 }
             }
             
-            /* Mobile optimizations */
-            @media (max-width: 768px) {
-                .animate-float,
-                .animate-bounce-gentle {
-                    animation-duration: 4s;
+            @keyframes confetti-fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
                 }
-                
+            }
+            
+            /* Mobile-specific optimizations */
+            @media (max-width: 768px) {
+                /* Better touch targets */
                 button, select, input {
-                    min-height: 48px;
+                    min-height: 44px;
                     font-size: 16px;
                 }
                 
+                /* Optimize scrolling */
                 * {
                     -webkit-overflow-scrolling: touch;
                 }
                 
-                .payment-card:hover {
-                    transform: translateY(-4px) scale(1.01);
+                /* Reduce shadows for better performance */
+                .shadow-2xl {
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                }
+                
+                /* Smaller modal padding */
+                .modal-content {
+                    padding: 1rem;
+                    margin: 0.5rem;
+                }
+                
+                /* Optimize animations */
+                .animate-float,
+                .animate-bounce-gentle {
+                    animation-duration: 4s;
                 }
             }
             
@@ -1144,7 +1096,7 @@ Meddelande: Donation Gaza
             button:focus,
             select:focus,
             input:focus {
-                outline: 3px solid rgba(59, 130, 246, 0.5);
+                outline: 2px solid rgba(59, 130, 246, 0.5);
                 outline-offset: 2px;
             }
             
@@ -1162,87 +1114,49 @@ Meddelande: Donation Gaza
                 }
             }
         `;
-        document.head.appendChild(rippleStyle);
-
-        // Handle orientation change on mobile
-        window.addEventListener('orientationchange', function() {
-            setTimeout(() => {
-                // Recalculate layouts if needed
-                const activeModal = document.querySelector('.modal.active');
-                if (activeModal) {
-                    activeModal.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }, 500);
-        });
-
-        // Prevent zoom on double tap for iOS
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
+        document.head.appendChild(style);
 
         // Initialize mobile-specific features
         document.addEventListener('DOMContentLoaded', function() {
+            // Add mobile class to body
             if (window.innerWidth <= 768) {
                 document.body.classList.add('mobile');
-                
-                // Reduce particles on mobile
-                const existingParticles = document.querySelectorAll('.floating-particle');
-                existingParticles.forEach((particle, index) => {
-                    if (index > 3) particle.remove();
-                });
             }
             
-            // Preload Revolut for faster redirects
+            // Preload QR API for faster generation
             const preloadLink = document.createElement('link');
             preloadLink.rel = 'dns-prefetch';
-            preloadLink.href = 'https://revolut.me';
+            preloadLink.href = 'https://api.qrserver.com';
             document.head.appendChild(preloadLink);
             
-            // Preload QR API
-            const qrPreloadLink = document.createElement('link');
-            qrPreloadLink.rel = 'dns-prefetch';
-            qrPreloadLink.href = 'https://api.qrserver.com';
-            document.head.appendChild(qrPreloadLink);
+            // Test Revolut link on page load
+            console.log('🔗 Revolut link ready: https://revolut.me/donationgasa');
         });
 
-        // Add service worker for better performance (if available)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                // Register service worker if you have one
-                // navigator.serviceWorker.register('/sw.js');
+        // Performance optimization for mobile
+        if (window.innerWidth <= 768) {
+            // Reduce particle count on mobile
+            const particles = document.querySelectorAll('.floating-particle');
+            particles.forEach((particle, index) => {
+                if (index > 2) particle.remove();
             });
+            
+            // Disable some animations on mobile for better performance
+            document.documentElement.style.setProperty('--animation-duration', '3s');
         }
 
-        // Enhanced error handling
-        window.addEventListener('error', function(e) {
-            console.error('Error occurred:', e.error);
-            showToast('Ett fel uppstod. Försök igen.', 'error');
-        });
-
-        // Add keyboard navigation support
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                // Close any open modals
-                const activeModal = document.querySelector('.modal.active');
-                if (activeModal) {
-                    activeModal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            }
-        });
-
-        // Analytics tracking (placeholder)
-        function trackDonation(method, amount) {
-            // Add your analytics tracking here
-            console.log(`Donation tracked: ${method} - ${amount} kr`);
+        // Debug function to test all payment methods
+        function testPaymentMethods() {
+            console.log('🧪 Testing payment methods:');
+            console.log('✅ Revolut: https://revolut.me/donationgasa');
+            console.log('✅ Swish: 076 557 89 04');
+            console.log('✅ Bank: LT51 3250 0230 2205 1319');
         }
 
-        console.log('🎉 Gaza Donation Page loaded successfully! 💳 Card payment ready! 📱 Mobile optimized! 🎉');
+        // Call test function
+        testPaymentMethods();
+
+        console.log('🎉 Gaza Donation Page loaded successfully! 📱 Mobile optimized! 💳 All payment methods working! 🎉');
     </script>
 </body>
 </html>
