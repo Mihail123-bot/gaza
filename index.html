@@ -350,6 +350,32 @@
             color: #3B82F6;
             background: rgba(59, 130, 246, 0.1);
         }
+
+        /* Gradient text with better mobile support */
+        .gradient-title {
+            background: linear-gradient(135deg, #DC2626, #1F2937, #16A34A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        /* Fallback for browsers that don't support background-clip */
+        @supports not (background-clip: text) {
+            .gradient-title {
+                color: #1F2937 !important;
+                font-weight: 800;
+            }
+        }
+
+        /* General text improvements */
+        .text-gray-600 {
+            font-weight: 500;
+        }
+
+        .text-gray-700 {
+            font-weight: 500;
+        }
         
         /* Mobile optimizations */
         @media (max-width: 768px) {
@@ -388,6 +414,669 @@
                 padding: 4px 8px;
                 font-size: 12px;
             }
+
+            /* Mobile text visibility fixes */
+            .gradient-title {
+                background: none !important;
+                -webkit-background-clip: unset !important;
+                background-clip: unset !important;
+                color: #1F2937 !important;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+                font-weight: 800;
+            }
+            
+            /* Improve text contrast */
+            .text-gray-600 {
+                color: #4B5563 !important;
+                font-weight: 600;
+            }
+            
+            .text-gray-700 {
+                color: #374151 !important;
+                font-weight: 600;
+            }
+            
+            /* Ensure modal text is visible */
+            .modal-content {
+                background: #FFFFFF !important;
+                color: #1F2937 !important;
+            }
+            
+            .modal-content .text-gray-600 {
+                color: #4B5563 !important;
+                font-weight: 600;
+            }
+            
+            .modal-content .text-gray-700 {
+                color: #374151 !important;
+                font-weight: 600;
+            }
+            
+            /* Fix testimonial text */
+            .testimonial-card .text-gray-700 {
+                color: #1F2937 !important;
+                font-weight: 600;
+            }
+            
+            /* Ensure footer text is visible */
+            footer .text-gray-300 {
+                color: #D1D5DB !important;
+                font-weight: 500;
+            }
+            
+            footer .text-gray-500 {
+                color: #9CA3AF !important;
+                font-weight: 500;
+            }
+            
+            /* Fix organization subtitle */
+            .text-gray-600[data-translate="org-subtitle"] {
+                color: #4B5563 !important;
+                font-weight: 600;
+            }
+            
+            /* Improve button text contrast */
+            .payment-card .text-gray-600 {
+                color: #374151 !important;
+                font-weight: 600;
+            }
+            
+            /* Fix small text visibility */
+            .text-xs.text-gray-600,
+            .text-sm.text-gray-600 {
+                color: #4B5563 !important;
+                font-weight: 600;
+            }
+            
+            /* Ensure all card text is readable */
+            .payment-card .text-gray-800 {
+                color: #111827 !important;
+                font-weight: 700;
+            }
+            
+            /* Fix contact information text */
+            .text-gray-700 {
+                color: #1F2937 !important;
+                font-weight: 600;
+            }
+            
+            /* High contrast mode improvements */
+            @media (prefers-contrast: high) {
+                .text-gray-600,
+                .text-gray-700 {
+                    color: #000000 !important;
+                    font-weight: 700;
+                }
+                
+                .gradient-title {
+                    color: #000000 !important;
+                    font-weight: 900;
+                }
+            }
+        }
+
+        /* Language selector styles */
+        .lang-btn {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--gaza-green), #059669) !important;
+            color: white;
+            border-color: var(--gaza-green);
+            transform: scale(1.05);
+        }
+        
+        .lang-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* RTL support */
+        .rtl {
+            direction: rtl;
+        }
+        
+        .rtl .flex {
+            flex-direction: row-reverse;
+        }
+        
+        .rtl .space-x-2 > * + * {
+            margin-left: 0;
+            margin-right: 0.5rem;
+        }
+        
+        .rtl .space-x-3 > * + * {
+            margin-left: 0;
+            margin-right: 0.75rem;
+        }
+        
+        .rtl .space-x-4 > * + * {
+            margin-left: 0;
+            margin-right: 1rem;
+        }
+        
+        .rtl .mr-2 {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+        
+        .rtl .mr-3 {
+            margin-right: 0;
+            margin-left: 0.75rem;
+        }
+        
+        .rtl .ml-2 {
+            margin-left: 0;
+            margin-right: 0.5rem;
+        }
+        
+        .rtl .text-left {
+            text-align: right;
+        }
+        
+        .rtl .text-right {
+            text-align: left;
+        }
+        
+        /* Enhanced modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .rtl .close-modal {
+            right: auto;
+            left: 1rem;
+        }
+        
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+        }
+        
+        /* Amount button styles */
+        .amount-btn {
+            background: white;
+            border: 2px solid #E5E7EB;
+            color: #6B7280;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .amount-btn:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .amount-btn.selected {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Payment card hover effects */
+        .payment-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .payment-card:active {
+            transform: translateY(-2px);
+        }
+        
+        /* Gaza flag */
+        .gaza-flag {
+            background: linear-gradient(to bottom, 
+                #000000 0%, #000000 33.33%, 
+                #FFFFFF 33.33%, #FFFFFF 66.66%, 
+                #00A651 66.66%, #00A651 100%);
+            position: relative;
+        }
+        
+        .gaza-flag::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 1.25rem 0 1.25rem 1rem;
+            border-color: transparent transparent transparent #DC143C;
+        }
+        
+        .rtl .gaza-flag::before {
+            left: auto;
+            right: 0;
+            border-width: 1.25rem 1rem 1.25rem 0;
+            border-color: transparent #DC143C transparent transparent;
+        }
+        
+        /* Phone display styling */
+        .phone-display {
+            background: linear-gradient(135deg, #1F2937, #111827);
+            color: #10B981;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        
+        /* Impact counter styling */
+        .impact-counter {
+            background: linear-gradient(135deg, var(--gaza-red), #DC2626);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+        
+        .impact-counter.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Testimonial card styling */
+        .testimonial-card {
+            background: linear-gradient(135deg, #F9FAFB, #F3F4F6);
+            border: 1px solid #E5E7EB;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--gaza-green);
+        }
+        
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Mobile optimizations continued */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 1rem;
+                margin: 0.5rem;
+                max-height: 95vh;
+            }
+            
+            .close-modal {
+                top: 0.5rem;
+                right: 0.5rem;
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+            
+            .rtl .close-modal {
+                right: auto;
+                left: 0.5rem;
+            }
+            
+            .payment-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Better touch targets */
+            button, .amount-btn {
+                min-height: 44px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            /* Reduce motion for better performance */
+            .animate-float,
+            .animate-bounce-gentle {
+                animation-duration: 4s;
+            }
+            
+            /* Optimize scrolling */
+            * {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Language selector mobile */
+            .lang-btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* Focus styles for accessibility */
+        button:focus,
+        .payment-card:focus,
+        input:focus,
+        select:focus {
+            outline: 3px solid rgba(34, 197, 94, 0.5);
+            outline-offset: 2px;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Copy button states */
+        .copy-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #F59E0B, #D97706) !important;
+            transform: scale(0.95);
+        }
+        
+        /* Loading states */
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .payment-card {
+                border: 2px solid #000;
+            }
+            
+            .modal-content {
+                border: 2px solid #000;
+            }
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .modal {
+                transition: none;
+            }
+            
+            .modal-content {
+                transform: none !important;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .floating-particles,
+            .modal,
+            #toast,
+            #loadingOverlay,
+            .lang-btn {
+                display: none !important;
+            }
+            
+            .payment-card {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+            
+            body {
+                background: white !important;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .modal-content {
+                background: #1F2937;
+                color: white;
+            }
+            
+            .bg-surface {
+                background: #374151;
+            }
+            
+            .text-gray-800 {
+                color: #F9FAFB;
+            }
+            
+            .text-gray-600 {
+                color: #D1D5DB;
+            }
+            
+            .border-gray-200 {
+                border-color: #4B5563;
+            }
+        }
+        
+        /* Accessibility improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 10000;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* Enhanced focus indicators */
+        .payment-card:focus-within {
+            outline: 3px solid rgba(34, 197, 94, 0.5);
+            outline-offset: 2px;
+        }
+        /* Improved button states */
+        button:hover:not(:disabled) {
+            transform: translateY(-1px);
+        }
+        
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        /* Enhanced loading animation */
+        @keyframes shimmer {
+            0% { 
+                background-position: -200px 0; 
+            }
+            100% { 
+                background-position: calc(200px + 100%) 0; 
+            }
+        }
+        
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200px 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        /* Improved toast positioning */
+        #toast {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10000;
+            max-width: 20rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .rtl #toast {
+            right: auto;
+            left: 1rem;
+        }
+        
+        /* Enhanced QR code styling */
+        #swishQRCode {
+            border: 4px solid #10B981;
+            border-radius: 0.5rem;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
+        }
+        
+        /* Improved form styling */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* Enhanced testimonial styling */
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -0.5rem;
+            left: 1rem;
+            font-size: 3rem;
+            color: var(--gaza-green);
+            opacity: 0.3;
+            font-family: serif;
+        }
+        
+        .rtl .testimonial-card::before {
+            left: auto;
+            right: 1rem;
+            content: '"';
+        }
+        
+        /* Progress bar animation */
+        .progress-bar {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+        }
+        
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
         }
     </style>
 </head>
@@ -424,7 +1113,7 @@
             </div>
             
             <div class="text-center animate-fade-in">
-                <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gaza-red via-gaza-black to-gaza-green bg-clip-text text-transparent mb-2 md:mb-4 animate-pulse-soft leading-tight" data-translate="main-title">
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold gradient-title mb-2 md:mb-4 animate-pulse-soft leading-tight" data-translate="main-title">
                     🤲 Donera till Gaza – Gör skillnad idag
                 </h2>
                 <p class="text-sm md:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed animate-slide-up px-2" data-translate="main-subtitle">
@@ -437,7 +1126,7 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-2 md:px-4 pb-4 md:pb-8 max-w-6xl">
+    <main class="container mx-auto px-2 md:px-4 pb-4 md:pb-8 max-w-6xl" id="main-content">
         <!-- What Your Donation Provides -->
         <section class="payment-card rounded-xl md:rounded-2xl p-4 md:p-6 mb-6 md:mb-8">
             <h2 class="text-xl md:text-2xl font-bold text-center text-gray-800 mb-4 md:mb-6">
@@ -710,7 +1399,7 @@
                                 <span class="text-xs md:text-sm text-gray-700" data-translate="money-usage-direct">Direkt hjälp</span>
                                 <span class="font-semibold text-gaza-green">85%</span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="w-full bg-gray-200 rounded-full h-2 progress-bar">
                                 <div class="bg-gaza-green h-2 rounded-full" style="width: 85%"></div>
                             </div>
                             
@@ -1066,6 +1755,11 @@
         </div>
     </div>
 
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">
+        <span data-translate="skip-to-content">Hoppa till huvudinnehåll</span>
+    </a>
+
     <script>
         // Global variables
         let selectedSwishAmount = 100;
@@ -1156,7 +1850,8 @@
                 'footer-transparency': 'Full transparens',
                 'footer-partners': 'Verifierade partners',
                 'loading-title': 'Laddar hjälpsidan...',
-                'loading-subtitle': 'Förbereder säkra donationsalternativ'
+                'loading-subtitle': 'Förbereder säkra donationsalternativ',
+                'skip-to-content': 'Hoppa till huvudinnehåll'
             },
             en: {
                 'org-name': 'Help Gaza Initiative',
@@ -1241,100 +1936,25 @@
                 'footer-transparency': 'Full transparency',
                 'footer-partners': 'Verified partners',
                 'loading-title': 'Loading aid page...',
-                'loading-subtitle': 'Preparing secure donation options'
-            },
-            ar: {
-                'org-name': 'مبادرة مساعدة غزة',
-                'org-subtitle': 'منظمة مساعدات إنسانية • مسجلة 2023',
-                'main-title': '🤲 تبرع لغزة - اصنع فرقاً اليوم',
-                'main-subtitle': 'نعمل مباشرة مع الشركاء المحليين في غزة لتقديم المساعدات الحيوية للعائلات المحتاجة.',
-                'donation-provides-title': 'ما يوفره تبرعك',
-                'donation-100': 'طعام لعائلة لمدة 3 أيام',
-                'donation-250': 'أدوية وإسعافات أولية',
-                'donation-500': 'مأوى مؤقت ودفء',
-                'testimonials-title': 'من شركائنا على الأرض',
-                'testimonial-1-role': 'منسق محلي، غزة',
-                'testimonial-1-text': 'بفضل تبرعاتكم تمكنا من مساعدة 50 عائلة بالطعام والدواء الأسبوع الماضي. كل كرونة تحدث فرقاً حقيقياً هنا.',
-                'testimonial-1-date': 'تم الإبلاغ في 15 نوفمبر 2024',
-                'testimonial-2-role': 'طبيبة، مركز غزة الصحي',
-                'testimonial-2-text': 'تبرعاتكم الطبية تنقذ الأرواح يومياً. عالجنا أكثر من 200 مريض بمواردكم هذا الشهر.',
-                'testimonial-2-date': 'تم الإبلاغ في 12 نوفمبر 2024',
-                'recent-aid-title': 'عمليات الإغاثة الأخيرة',
-                'aid-food': 'توزيع الطعام',
-                'aid-medical': 'المساعدة الطبية',
-                'aid-children': 'مساعدة الأطفال',
-                'aid-winter': 'مساعدة الشتاء',
-                'verified-partners': 'جميع الصور من شركائنا المعتمدين على الأرض في غزة',
-                'payment-methods-title': 'اختر طريقة التبرع',
-                'payment-card-title': 'بطاقة/ريفولوت',
-                'payment-card-desc': 'دفع سريع وآمن بالبطاقة عبر ريفولوت. يعمل دولياً.',
-                'payment-card-recommended': 'موصى به - الأسرع',
-                'payment-swish-title': 'سويش',
-                'payment-swish-desc': 'بسيط وآمن للمستخدمين السويديين. امسح رمز QR أو سويش مباشرة.',
-                'payment-bank-title': 'تحويل بنكي',
-                'payment-bank-desc': 'تحويل دولي عبر بنك ريفولوت للتبرعات الكبيرة.',
-                'payment-bank-international': 'دولي',
-                'transparency-title': 'الشفافية والمصداقية',
-                'transparency-registered-title': 'منظمة مسجلة',
-                'transparency-registered-desc': 'منظمة إنسانية مسجلة رسمياً منذ 2023',
-                'transparency-100-title': 'شفافية 100%',
-                'transparency-100-desc': 'جميع التبرعات يتم الإبلاغ عنها علناً وتذهب مباشرة للمساعدة',
-                'transparency-partners-title': 'شركاء محليون',
-                'transparency-partners-desc': 'نتعاون مع منظمات معتمدة في الموقع',
-                'money-usage-title': 'كيف تُستخدم أموالك',
-                'money-usage-direct': 'مساعدة مباشرة',
-                'money-usage-admin': 'إدارة',
-                'money-usage-transport': 'نقل/لوجستيات',
-                'secure-transactions': 'جميع المعاملات آمنة وقابلة للتتبع',
-                'contact-title': 'الاتصال والتحقق',
-                'contact-us': 'اتصل بنا',
-                'contact-hours': 'أيام العمل 09:00-17:00',
-                'org-number': 'رقم المنظمة',
-                'registered-association': 'جمعية غير ربحية مسجلة',
-                'contact-verify': 'يمكنك دائماً الاتصال بنا للتحقق من التبرعات أو الحصول على مزيد من المعلومات',
-                'trust-title': 'تبرع آمن وشفاف',
-                'trust-secure-title': 'آمن 100%',
-                'trust-secure-desc': 'جميع المعاملات مشفرة وآمنة',
-                'trust-transparent-title': 'شفاف',
-                'trust-transparent-desc': 'رؤية كاملة لكيفية استخدام التبرعات',
-                'trust-direct-title': 'مساعدة مباشرة',
-                'trust-direct-desc': '85% من التبرع يذهب مباشرة للمحتاجين',
-                'swish-modal-title': 'تبرع بسويش',
-                'swish-modal-subtitle': 'سريع وآمن وبسيط',
-                'swish-amount-label': 'اختر المبلغ (الحد الأدنى 100 كرونة)',
-                'swish-custom-placeholder': 'أو أدخل مبلغاً مخصصاً (الحد الأدنى 100 كرونة)',
-                'swish-generate-qr': 'إنشاء رمز QR لسويش',
-                'swish-to': 'سويش إلى',
-                'copy': 'نسخ',
-                'swish-amount': 'المبلغ:',
-                'swish-message': 'الرسالة:',
-                'swish-open-app': 'فتح تطبيق سويش',
-                'swish-instructions-title': 'التعليمات',
-                'swish-instructions': 'سويش إلى <strong>076 557 89 04</strong> مع الرسالة <strong>"Donation Gaza"</strong>',
-                'bank-modal-title': 'تحويل بنكي',
-                'bank-modal-subtitle': 'بنك ريفولوت - تبرعات دولية',
-                'bank-recipient': 'المستلم:',
-                'bank-bank': 'البنك:',
-                'bank-address': 'العنوان:',
-                'bank-correspondent': 'BIC المراسل:',
-                'bank-message': 'الرسالة:',
-                'bank-copy-all': 'نسخ جميع المعلومات البنكية',
-                'org-number-short': 'رقم المنظمة:',
-                'footer-description': 'جمعية غير ربحية مسجلة - 85% من التبرعات تذهب مباشرة للمساعدة',
-                'footer-copyright': '© 2024 مبادرة مساعدة غزة. جميع الحقوق محفوظة.',
-                'footer-secure': 'تبرعات آمنة',
-                'footer-transparency': 'شفافية كاملة',
-                'footer-partners': 'شركاء معتمدون',
-                'loading-title': 'جاري تحميل صفحة المساعدة...',
-                'loading-subtitle': 'إعداد خيارات التبرع الآمنة'
+                'loading-subtitle': 'Preparing secure donation options',
+                'skip-to-content': 'Skip to main content'
             }
         };
 
         // Language switching function
         function switchLanguage(lang) {
             currentLanguage = lang;
-            const elements = document.querySelectorAll('[data-translate]');
             
+            // Update language buttons
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update all translatable elements
+            const elements = document.querySelectorAll('[data-translate]');
             elements.forEach(element => {
                 const key = element.getAttribute('data-translate');
                 if (translations[lang] && translations[lang][key]) {
@@ -1355,17 +1975,15 @@
                 }
             });
 
-            // Update document language
+            // Update document language and direction
             document.documentElement.lang = lang;
             
-            // Update direction for Arabic
-            if (lang === 'ar') {
-                document.documentElement.dir = 'rtl';
-                document.body.classList.add('rtl');
-            } else {
-                document.documentElement.dir = 'ltr';
-                document.body.classList.remove('rtl');
-            }
+            // Update title based on language
+            const titles = {
+                sv: '🤲 Hjälp Gaza - Humanitär Hjälporganisation',
+                en: '🤲 Help Gaza - Humanitarian Aid Organization'
+            };
+            document.title = titles[lang] || titles.sv;
 
             // Save language preference
             localStorage.setItem('preferred-language', lang);
@@ -1401,50 +2019,19 @@
                     'bank-opened': 'Bank transfer opened',
                     'revolut-opening': 'Opening Revolut for secure card payment...',
                     'swish-app-fallback': 'If Swish app didn\'t open, use the QR code'
-                },
-                ar: {
-                    'language-changed': 'تم تغيير اللغة إلى العربية',
-                    'phone-copied': 'تم نسخ رقم الهاتف!',
-                    'iban-copied': 'تم نسخ IBAN!',
-                    'bank-info-copied': 'تم نسخ جميع المعلومات البنكية!',
-                    'amount-selected': 'كرونة مختارة لتبرع سويش',
-                    'amount-error': 'يرجى إدخال مبلغ لا يقل عن 100 كرونة',
-                    'qr-generated': 'تم إنشاء رمز QR! امسح بتطبيق سويش',
-                    'swish-opened': 'تم فتح تبرع سويش',
-                    'bank-opened': 'تم فتح التحويل البنكي',
-                    'revolut-opening': 'فتح ريفولوت للدفع الآمن بالبطاقة...',
-                    'swish-app-fallback': 'إذا لم يفتح تطبيق سويش، استخدم رمز QR'
                 }
             };
             
             return toastMessages[lang] && toastMessages[lang][key] ? toastMessages[lang][key] : key;
         }
 
-        // Add language selector to header
-        function addLanguageSelector() {
-            const header = document.querySelector('header .container');
-            const langSelector = document.createElement('div');
-            langSelector.className = 'absolute top-4 right-4 flex space-x-2';
-            langSelector.innerHTML = `
-                <button onclick="switchLanguage('sv')" class="lang-btn ${currentLanguage === 'sv' ? 'active' : ''} px-2 py-1 text-xs rounded bg-white/80 hover:bg-white transition-colors">
-                    🇸🇪 SV
-                </button>
-                <button onclick="switchLanguage('en')" class="lang-btn ${currentLanguage === 'en' ? 'active' : ''} px-2 py-1 text-xs rounded bg-white/80 hover:bg-white transition-colors">
-                    🇬🇧 EN
-                </button>
-                <button onclick="switchLanguage('ar')" class="lang-btn ${currentLanguage === 'ar' ? 'active' : ''} px-2 py-1 text-xs rounded bg-white/80 hover:bg-white transition-colors">
-                    🇵🇸 AR
-                </button>
-            `;
-            header.appendChild(langSelector);
-        }
-
         // Loading animation
         window.addEventListener('load', function() {
             setTimeout(() => {
-                document.getElementById('loadingOverlay').style.opacity = '0';
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                loadingOverlay.style.opacity = '0';
                 setTimeout(() => {
-                    document.getElementById('loadingOverlay').style.display = 'none';
+                    loadingOverlay.style.display = 'none';
                 }, 500);
             }, 1500);
         });
@@ -1453,7 +2040,7 @@
         function openRevolutPayment() {
             showToast(getToastMessage('revolut-opening', currentLanguage), 'info');
             setTimeout(() => {
-                window.open('https://revolut.me/donationgasa', '_blank');
+                window.open('https://revolut.me/donationgaza', '_blank');
             }, 500);
         }
 
@@ -1517,7 +2104,11 @@
 
             const button = event.target;
             const originalText = button.innerHTML;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>' + (currentLanguage === 'ar' ? 'جاري إنشاء رمز QR...' : currentLanguage === 'en' ? 'Generating QR code...' : 'Genererar QR-kod...');
+            const loadingText = currentLanguage === 'en' ? 
+                '<i class="fas fa-spinner fa-spin mr-2"></i>Generating QR code...' : 
+                '<i class="fas fa-spinner fa-spin mr-2"></i>Genererar QR-kod...';
+            
+            button.innerHTML = loadingText;
             button.disabled = true;
 
             setTimeout(() => {
@@ -1573,9 +2164,12 @@
             const phoneNumber = '076 557 89 04';
             const button = event.target.closest('button');
             const originalText = button.innerHTML;
+            const copiedText = currentLanguage === 'en' ? 
+                '<i class="fas fa-check mr-1"></i>Copied!' : 
+                '<i class="fas fa-check mr-1"></i>Kopierat!';
             
             navigator.clipboard.writeText(phoneNumber).then(function() {
-                button.innerHTML = '<i class="fas fa-check mr-1"></i>' + (currentLanguage === 'ar' ? 'تم النسخ!' : currentLanguage === 'en' ? 'Copied!' : 'Kopierat!');
+                button.innerHTML = copiedText;
                 button.classList.add('copied');
                 
                 setTimeout(() => {
@@ -1585,6 +2179,7 @@
                 
                 showToast(getToastMessage('phone-copied', currentLanguage), 'success');
             }).catch(function() {
+                // Fallback for older browsers
                 const textArea = document.createElement('textarea');
                 textArea.value = phoneNumber;
                 document.body.appendChild(textArea);
@@ -1592,7 +2187,7 @@
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
                 
-                button.innerHTML = '<i class="fas fa-check mr-1"></i>' + (currentLanguage === 'ar' ? 'تم النسخ!' : currentLanguage === 'en' ? 'Copied!' : 'Kopierat!');
+                button.innerHTML = copiedText;
                 button.classList.add('copied');
                 
                 setTimeout(() => {
@@ -1620,6 +2215,7 @@
                 
                 showToast(getToastMessage('iban-copied', currentLanguage), 'success');
             }).catch(function() {
+                // Fallback for older browsers
                 const textArea = document.createElement('textarea');
                 textArea.value = iban;
                 document.body.appendChild(textArea);
@@ -1657,9 +2253,12 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
             
             const button = event.target;
             const originalText = button.innerHTML;
+            const copiedText = currentLanguage === 'en' ? 
+                '<i class="fas fa-check mr-2"></i>All information copied!' : 
+                '<i class="fas fa-check mr-2"></i>All information kopierad!';
             
             navigator.clipboard.writeText(bankInfo).then(function() {
-                button.innerHTML = '<i class="fas fa-check mr-2"></i>' + (currentLanguage === 'ar' ? 'تم نسخ جميع المعلومات!' : currentLanguage === 'en' ? 'All information copied!' : 'All information kopierad!');
+                button.innerHTML = copiedText;
                 button.classList.add('bg-secondary');
                 
                 setTimeout(() => {
@@ -1669,6 +2268,7 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
                 
                 showToast(getToastMessage('bank-info-copied', currentLanguage), 'success');
             }).catch(function() {
+                // Fallback for older browsers
                 const textArea = document.createElement('textarea');
                 textArea.value = bankInfo;
                 document.body.appendChild(textArea);
@@ -1676,7 +2276,7 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
                 
-                button.innerHTML = '<i class="fas fa-check mr-2"></i>' + (currentLanguage === 'ar' ? 'تم نسخ جميع المعلومات!' : currentLanguage === 'en' ? 'All information copied!' : 'All information kopierad!');
+                button.innerHTML = copiedText;
                 setTimeout(() => {
                     button.innerHTML = originalText;
                 }, 3000);
@@ -1705,31 +2305,17 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
                 toastIcon.className = 'fas fa-check-circle text-lg animate-pulse-soft flex-shrink-0';
             }
             
-            // Adjust position for RTL
-            if (currentLanguage === 'ar') {
-                toast.style.left = '1rem';
-                toast.style.right = 'auto';
-                toast.style.transform = 'translateX(-100%)';
-            } else {
-                toast.style.right = '1rem';
-                toast.style.left = 'auto';
-                toast.style.transform = 'translateX(100%)';
-            }
-            
             setTimeout(() => {
                 toast.style.transform = 'translateX(0)';
             }, 100);
             
+            // Haptic feedback if available
             if ('vibrate' in navigator && (type === 'success' || type === 'error')) {
                 navigator.vibrate(type === 'success' ? [100] : [100, 50, 100]);
             }
             
             setTimeout(() => {
-                if (currentLanguage === 'ar') {
-                    toast.style.transform = 'translateX(-100%)';
-                } else {
-                    toast.style.transform = 'translateX(100%)';
-                }
+                toast.style.transform = 'translateX(100%)';
             }, type === 'error' ? 5000 : 3000);
         }
 
@@ -1806,9 +2392,6 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
             // Load saved language preference
             const savedLanguage = localStorage.getItem('preferred-language') || 'sv';
             currentLanguage = savedLanguage;
-            
-            // Add language selector
-            addLanguageSelector();
             
             // Apply saved language
             if (savedLanguage !== 'sv') {
@@ -1902,609 +2485,19 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
             // Reduce animation frequency
             document.documentElement.style.setProperty('--animation-duration', '3s');
             
-            // Disable some resource-intensive animations
+            // Disable some resource-intensive animations on very old devices
             const heavyAnimations = document.querySelectorAll('.animate-float');
-            heavyAnimations.forEach(el => {
-                el.style.animation = 'none';
-            });
-        }
-
-        // Service worker registration (if available)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                // Uncomment if you have a service worker
-                // navigator.serviceWorker.register('/sw.js');
-            });
-        }
-
-        // Add additional CSS for enhanced functionality
-        const additionalStyles = document.createElement('style');
-        additionalStyles.textContent = `
-            /* Language selector styles */
-            .lang-btn {
-                transition: all 0.3s ease;
-                border: 1px solid rgba(0, 0, 0, 0.1);
+            if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+                heavyAnimations.forEach(el => {
+                    el.style.animation = 'none';
+                });
             }
-            
-            .lang-btn.active {
-                background: linear-gradient(135deg, var(--gaza-green), #059669) !important;
-                color: white;
-                border-color: var(--gaza-green);
-                transform: scale(1.05);
-            }
-            
-            .lang-btn:hover {
-                transform: translateY(-1px);
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            }
-            
-            /* RTL support */
-            .rtl {
-                direction: rtl;
-            }
-            
-            .rtl .flex {
-                flex-direction: row-reverse;
-            }
-            
-            .rtl .space-x-2 > * + * {
-                margin-left: 0;
-                margin-right: 0.5rem;
-            }
-            
-            .rtl .space-x-3 > * + * {
-                margin-left: 0;
-                margin-right: 0.75rem;
-            }
-            
-            .rtl .space-x-4 > * + * {
-                margin-left: 0;
-                margin-right: 1rem;
-            }
-            
-            .rtl .mr-2 {
-                margin-right: 0;
-                margin-left: 0.5rem;
-            }
-            
-            .rtl .mr-3 {
-                margin-right: 0;
-                margin-left: 0.75rem;
-            }
-            
-            .rtl .ml-2 {
-                margin-left: 0;
-                margin-right: 0.5rem;
-            }
-            
-            .rtl .text-left {
-                text-align: right;
-            }
-            
-            .rtl .text-right {
-                text-align: left;
-            }
-            
-            /* Enhanced modal styles */
-            .modal {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                backdrop-filter: blur(5px);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000;
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                padding: 1rem;
-            }
-            
-            .modal.active {
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .modal-content {
-                background: white;
-                border-radius: 1rem;
-                padding: 1.5rem;
-                max-width: 500px;
-                width: 100%;
-                max-height: 90vh;
-                overflow-y: auto;
-                transform: scale(0.9);
-                transition: transform 0.3s ease;
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-                position: relative;
-            }
-            
-            .modal.active .modal-content {
-                transform: scale(1);
-            }
-            
-            .close-modal {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                background: rgba(0, 0, 0, 0.1);
-                border: none;
-                border-radius: 50%;
-                width: 2rem;
-                height: 2rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                z-index: 10;
-            }
-            
-            .rtl .close-modal {
-                right: auto;
-                left: 1rem;
-            }
-            
-            .close-modal:hover {
-                background: rgba(0, 0, 0, 0.2);
-                transform: scale(1.1);
-            }
-            
-            /* Amount button styles */
-            .amount-btn {
-                background: white;
-                border: 2px solid #E5E7EB;
-                color: #6B7280;
-                transition: all 0.3s ease;
-                cursor: pointer;
-            }
-            
-            .amount-btn:hover {
-                border-color: var(--secondary);
-                color: var(--secondary);
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            }
-            
-            .amount-btn.selected {
-                background: var(--secondary);
-                border-color: var(--secondary);
-                color: white;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-            }
-            
-            /* Payment card hover effects */
-            .payment-card {
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                cursor: pointer;
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .payment-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            }
-            
-            .payment-card:active {
-                transform: translateY(-2px);
-            }
-            
-            /* Gaza flag */
-            .gaza-flag {
-                background: linear-gradient(to bottom, 
-                    #000000 0%, #000000 33.33%, 
-                    #FFFFFF 33.33%, #FFFFFF 66.66%, 
-                    #00A651 66.66%, #00A651 100%);
-                position: relative;
-            }
-            
-            .gaza-flag::before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 0;
-                height: 0;
-                border-style: solid;
-                border-width: 1.25rem 0 1.25rem 1rem;
-                border-color: transparent transparent transparent #DC143C;
-            }
-            
-            .rtl .gaza-flag::before {
-                left: auto;
-                right: 0;
-                border-width: 1.25rem 1rem 1.25rem 0;
-                border-color: transparent #DC143C transparent transparent;
-            }
-            
-            /* Phone display styling */
-            .phone-display {
-                background: linear-gradient(135deg, #1F2937, #111827);
-                color: #10B981;
-                font-family: 'Courier New', monospace;
-                letter-spacing: 1px;
-            }
-            
-            /* Impact counter styling */
-            .impact-counter {
-                background: linear-gradient(135deg, var(--gaza-red), #DC2626);
-                color: white;
-                padding: 1rem;
-                border-radius: 0.75rem;
-                text-align: center;
-                box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-                transform: translateY(20px);
-                opacity: 0;
-                transition: all 0.6s ease;
-            }
-            
-            .impact-counter.visible {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            
-            /* Testimonial card styling */
-            .testimonial-card {
-                background: linear-gradient(135deg, #F9FAFB, #F3F4F6);
-                border: 1px solid #E5E7EB;
-                transition: all 0.3s ease;
-            }
-            
-            .testimonial-card:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-                border-color: var(--gaza-green);
-            }
-            
-            /* Ripple effect */
-            .ripple {
-                position: absolute;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.6);
-                transform: scale(0);
-                animation: ripple-animation 0.6s linear;
-                pointer-events: none;
-            }
-            
-            @keyframes ripple-animation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-            
-            @keyframes confetti-fall {
-                to {
-                    transform: translateY(100vh) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-            
-            /* Mobile optimizations */
-            @media (max-width: 768px) {
-                .modal-content {
-                    padding: 1rem;
-                    margin: 0.5rem;
-                    max-height: 95vh;
-                }
-                
-                .close-modal {
-                    top: 0.5rem;
-                    right: 0.5rem;
-                    width: 1.75rem;
-                    height: 1.75rem;
-                }
-                
-                .rtl .close-modal {
-                    right: auto;
-                    left: 0.5rem;
-                }
-                
-                .payment-card:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-                }
-                
-                /* Better touch targets */
-                button, .amount-btn {
-                    min-height: 44px;
-                    font-size: 16px; /* Prevents zoom on iOS */
-                }
-                
-                /* Reduce motion for better performance */
-                .animate-float,
-                .animate-bounce-gentle {
-                    animation-duration: 4s;
-                }
-                
-                /* Optimize scrolling */
-                * {
-                    -webkit-overflow-scrolling: touch;
-                }
-                
-                /* Language selector mobile */
-                .lang-btn {
-                    padding: 0.25rem 0.5rem;
-                    font-size: 0.75rem;
-                }
-            }
-            
-            /* Focus styles for accessibility */
-            button:focus,
-            .payment-card:focus,
-            input:focus,
-            select:focus {
-                outline: 3px solid rgba(34, 197, 94, 0.5);
-                outline-offset: 2px;
-            }
-            
-            /* Smooth scrolling */
-            html {
-                scroll-behavior: smooth;
-            }
-            
-            /* Copy button states */
-            .copy-btn {
-                transition: all 0.3s ease;
-            }
-            
-            .copy-btn.copied {
-                background: linear-gradient(135deg, #F59E0B, #D97706) !important;
-                transform: scale(0.95);
-            }
-            
-            /* Loading states */
-            button:disabled {
-                opacity: 0.7;
-                cursor: not-allowed;
-                transform: none !important;
-            }
-            
-            /* High contrast mode support */
-            @media (prefers-contrast: high) {
-                .payment-card {
-                    border: 2px solid #000;
-                }
-                
-                .modal-content {
-                    border: 2px solid #000;
-                }
-            }
-            
-            /* Reduced motion support */
-            @media (prefers-reduced-motion: reduce) {
-                * {
-                    animation-duration: 0.01ms !important;
-                    animation-iteration-count: 1 !important;
-                    transition-duration: 0.01ms !important;
-                }
-                
-                .modal {
-                    transition: none;
-                }
-                
-                .modal-content {
-                    transform: none !important;
-                }
-            }
-            
-            /* Print styles */
-            @media print {
-                .floating-particles,
-                .modal,
-                #toast,
-                #loadingOverlay,
-                .lang-btn {
-                    display: none !important;
-                }
-                
-                .payment-card {
-                    box-shadow: none;
-                    border: 1px solid #000;
-                }
-                
-                body {
-                    background: white !important;
-                }
-            }
-            
-            /* Dark mode support */
-            @media (prefers-color-scheme: dark) {
-                .modal-content {
-                    background: #1F2937;
-                    color: white;
-                }
-                
-                .bg-surface {
-                    background: #374151;
-                }
-                
-                .text-gray-800 {
-                    color: #F9FAFB;
-                }
-                
-                .text-gray-600 {
-                    color: #D1D5DB;
-                }
-                
-                .border-gray-200 {
-                    border-color: #4B5563;
-                }
-            }
-            
-            /* Accessibility improvements */
-            .sr-only {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                white-space: nowrap;
-                border: 0;
-            }
-            
-            /* Skip link */
-            .skip-link {
-                position: absolute;
-                top: -40px;
-                left: 6px;
-                background: #000;
-                color: #fff;
-                padding: 8px;
-                text-decoration: none;
-                z-index: 10000;
-            }
-            
-            .skip-link:focus {
-                top: 6px;
-            }
-            
-            /* Enhanced focus indicators */
-            .payment-card:focus-within {
-                outline: 3px solid rgba(34, 197, 94, 0.5);
-                outline-offset: 2px;
-            }
-            
-            /* Improved button states */
-            button:hover:not(:disabled) {
-                transform: translateY(-1px);
-            }
-            
-            button:active:not(:disabled) {
-                transform: translateY(0);
-            }
-            
-            /* Enhanced loading animation */
-            @keyframes shimmer {
-                0% { 
-                    background-position: -200px 0; 
-                }
-                100% { 
-                    background-position: calc(200px + 100%) 0; 
-                }
-            }
-            
-            .loading-shimmer {
-                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-                background-size: 200px 100%;
-                animation: shimmer 1.5s infinite;
-            }
-            
-            /* Improved toast positioning */
-            #toast {
-                position: fixed;
-                top: 1rem;
-                right: 1rem;
-                z-index: 10000;
-                max-width: 20rem;
-                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            
-            .rtl #toast {
-                right: auto;
-                left: 1rem;
-            }
-            
-            /* Enhanced QR code styling */
-            #swishQRCode {
-                border: 4px solid #10B981;
-                border-radius: 0.5rem;
-                box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
-            }
-            
-            /* Improved form styling */
-            input[type="number"] {
-                -moz-appearance: textfield;
-            }
-            
-            input[type="number"]::-webkit-outer-spin-button,
-            input[type="number"]::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-            
-            /* Enhanced testimonial styling */
-            .testimonial-card::before {
-                content: '"';
-                position: absolute;
-                top: -0.5rem;
-                left: 1rem;
-                font-size: 3rem;
-                color: var(--gaza-green);
-                opacity: 0.3;
-                font-family: serif;
-            }
-            
-            .rtl .testimonial-card::before {
-                left: auto;
-                right: 1rem;
-                content: '"';
-            }
-            
-            /* Progress bar animation */
-            .progress-bar {
-                overflow: hidden;
-                position: relative;
-            }
-            
-            .progress-bar::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                right: 0;
-                background-image: linear-gradient(
-                    -45deg,
-                    rgba(255, 255, 255, 0.2) 25%,
-                    transparent 25%,
-                    transparent 50%,
-                    rgba(255, 255, 255, 0.2) 50%,
-                    rgba(255, 255, 255, 0.2) 75%,
-                    transparent 75%,
-                    transparent
-                );
-                background-size: 50px 50px;
-                animation: move 2s linear infinite;
-            }
-            
-            @keyframes move {
-                0% {
-                    background-position: 0 0;
-                }
-                100% {
-                    background-position: 50px 50px;
-                }
-            }
-        `;
-        document.head.appendChild(additionalStyles);
-
-        // Add skip link for accessibility
-        const skipLink = document.createElement('a');
-        skipLink.href = '#main-content';
-        skipLink.className = 'skip-link';
-        skipLink.textContent = currentLanguage === 'ar' ? 'تخطي إلى المحتوى الرئيسي' : currentLanguage === 'en' ? 'Skip to main content' : 'Hoppa till huvudinnehåll';
-        document.body.insertBefore(skipLink, document.body.firstChild);
-
-        // Add main content ID for skip link
-        const mainElement = document.querySelector('main');
-        if (mainElement) {
-            mainElement.id = 'main-content';
         }
 
         // Enhanced error handling
         window.addEventListener('error', function(e) {
             console.error('JavaScript error:', e.error);
             showToast(
-                currentLanguage === 'ar' ? 'حدث خطأ. يرجى إعادة تحميل الصفحة.' :
                 currentLanguage === 'en' ? 'An error occurred. Please reload the page.' :
                 'Ett fel uppstod. Vänligen ladda om sidan.',
                 'error'
@@ -2514,7 +2507,6 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
         // Network status monitoring
         window.addEventListener('online', function() {
             showToast(
-                currentLanguage === 'ar' ? 'الاتصال بالإنترنت مستعاد' :
                 currentLanguage === 'en' ? 'Internet connection restored' :
                 'Internetanslutning återställd',
                 'success'
@@ -2523,26 +2515,11 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
 
         window.addEventListener('offline', function() {
             showToast(
-                currentLanguage === 'ar' ? 'لا يوجد اتصال بالإنترنت' :
                 currentLanguage === 'en' ? 'No internet connection' :
                 'Ingen internetanslutning',
                 'error'
             );
         });
-
-        // Initialize page
-        console.log('🇵🇸 Hjälp Gaza Initiative - Multilingual donation platform loaded! 🤝');
-        console.log('📱 Mobile optimized | 🔒 Secure payments | 👁️ Full transparency | 🌍 Multi-language');
-        
-        // Track page load for analytics (if needed)
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'page_view', {
-                page_title: 'Gaza Donation Page',
-                page_location: window.location.href,
-                language: currentLanguage
-            });
-        }
-
         // Add structured data for SEO
         const structuredData = {
             "@context": "https://schema.org",
@@ -2550,7 +2527,6 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
             "name": "Hjälp Gaza Initiative",
             "alternateName": "Help Gaza Initiative",
             "url": window.location.href,
-            "logo": "https://example.com/logo.png",
             "description": "Humanitarian aid organization providing direct assistance to families in Gaza",
             "foundingDate": "2023",
             "areaServed": "Gaza",
@@ -2597,8 +2573,7 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
             { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
             { name: 'apple-mobile-web-app-title', content: 'Gaza Aid' },
             { name: 'application-name', content: 'Gaza Aid' },
-            { name: 'msapplication-TileColor', content: '#16A34A' },
-            { name: 'msapplication-config', content: '/browserconfig.xml' }
+            { name: 'msapplication-TileColor', content: '#16A34A' }
         ];
 
         metaTags.forEach(tag => {
@@ -2626,15 +2601,17 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
             document.head.appendChild(link);
         });
 
-        // Initialize intersection observer for lazy loading
+        // Initialize intersection observer for lazy loading images
         if ('IntersectionObserver' in window) {
             const lazyImageObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.remove('lazy');
-                        lazyImageObserver.unobserve(img);
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            lazyImageObserver.unobserve(img);
+                        }
                     }
                 });
             });
@@ -2643,6 +2620,858 @@ Kontakt: info@hjalpgaza.se | 076 557 89 04
                 lazyImageObserver.observe(img);
             });
         }
+
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(event) {
+            // Tab navigation enhancement
+            if (event.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+            
+            // Enter key support for payment cards
+            if (event.key === 'Enter' && event.target.classList.contains('payment-card')) {
+                event.target.click();
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // Enhanced accessibility features
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+
+        // Update copy functions to include screen reader announcements
+        const originalCopyPhoneNumber = copyPhoneNumber;
+        copyPhoneNumber = function() {
+            originalCopyPhoneNumber.call(this);
+            announceToScreenReader(getToastMessage('phone-copied', currentLanguage));
+        };
+
+        // Add focus management for modals
+        let lastFocusedElement = null;
+
+        function trapFocus(modal) {
+            const focusableElements = modal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstFocusableElement = focusableElements[0];
+            const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+            modal.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusableElement) {
+                            lastFocusableElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusableElement) {
+                            firstFocusableElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+
+            firstFocusableElement.focus();
+        }
+
+        // Enhanced modal functions with accessibility
+        const originalOpenSwishModal = openSwishModal;
+        openSwishModal = function() {
+            lastFocusedElement = document.activeElement;
+            originalOpenSwishModal.call(this);
+            setTimeout(() => {
+                trapFocus(document.getElementById('swishModal'));
+            }, 100);
+        };
+
+        const originalOpenBankModal = openBankModal;
+        openBankModal = function() {
+            lastFocusedElement = document.activeElement;
+            originalOpenBankModal.call(this);
+            setTimeout(() => {
+                trapFocus(document.getElementById('bankModal'));
+            }, 100);
+        };
+
+        const originalCloseModal = closeModal;
+        closeModal = function(modalId) {
+            originalCloseModal.call(this, modalId);
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+                lastFocusedElement = null;
+            }
+        };
+
+        // Add smooth scrolling polyfill for older browsers
+        if (!('scrollBehavior' in document.documentElement.style)) {
+            const smoothScrollPolyfill = document.createElement('script');
+            smoothScrollPolyfill.src = 'https://cdn.jsdelivr.net/gh/iamdustan/smoothscroll@master/src/smoothscroll.js';
+            document.head.appendChild(smoothScrollPolyfill);
+        }
+
+        // Add reduced motion support
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        
+        function handleReducedMotion() {
+            if (prefersReducedMotion.matches) {
+                document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+                document.documentElement.style.setProperty('--transition-duration', '0.01ms');
+                
+                // Disable floating particles
+                const particles = document.querySelectorAll('.floating-particle');
+                particles.forEach(particle => {
+                    particle.style.display = 'none';
+                });
+            }
+        }
+
+        prefersReducedMotion.addEventListener('change', handleReducedMotion);
+        handleReducedMotion();
+
+        // Add high contrast mode support
+        const prefersHighContrast = window.matchMedia('(prefers-contrast: high)');
+        
+        function handleHighContrast() {
+            if (prefersHighContrast.matches) {
+                document.body.classList.add('high-contrast');
+            } else {
+                document.body.classList.remove('high-contrast');
+            }
+        }
+
+        prefersHighContrast.addEventListener('change', handleHighContrast);
+        handleHighContrast();
+
+        // Add print styles optimization
+        window.addEventListener('beforeprint', function() {
+            // Hide unnecessary elements before printing
+            const elementsToHide = document.querySelectorAll('.floating-particles, .modal, #toast, #loadingOverlay, .language-switcher');
+            elementsToHide.forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('afterprint', function() {
+            // Restore elements after printing
+            const elementsToShow = document.querySelectorAll('.floating-particles, .language-switcher');
+            elementsToShow.forEach(el => {
+                el.style.display = '';
+            });
+        });
+
+        // Add service worker for offline functionality (if available)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Uncomment if you have a service worker file
+                /*
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed');
+                    });
+                */
+            });
+        }
+
+        // Add Web App Manifest support
+        const manifestLink = document.createElement('link');
+        manifestLink.rel = 'manifest';
+        manifestLink.href = '/manifest.json';
+        document.head.appendChild(manifestLink);
+
+        // Initialize page with console message
+        console.log('🇵🇸 Hjälp Gaza Initiative - Multilingual donation platform loaded! 🤝');
+        console.log('📱 Mobile optimized | 🔒 Secure payments | 👁️ Full transparency | 🌍 Multi-language');
+        console.log('♿ Accessibility enhanced | 🎨 High contrast support | ⚡ Performance optimized');
+        
+        // Track page load for analytics (if needed)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_title: 'Gaza Donation Page',
+                page_location: window.location.href,
+                language: currentLanguage
+            });
+        }
+
+        // Add error boundary for React-like error handling
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+            showToast(
+                currentLanguage === 'en' ? 'A network error occurred. Please try again.' :
+                'Ett nätverksfel uppstod. Vänligen försök igen.',
+                'error'
+            );
+        });
+
+        // Add connection quality detection
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            
+            function handleConnectionChange() {
+                if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                    // Optimize for slow connections
+                    document.body.classList.add('slow-connection');
+                    
+                    // Disable heavy animations
+                    const heavyAnimations = document.querySelectorAll('.animate-float, .animate-bounce-gentle');
+                    heavyAnimations.forEach(el => {
+                        el.style.animation = 'none';
+                    });
+                } else {
+                    document.body.classList.remove('slow-connection');
+                }
+            }
+            
+            connection.addEventListener('change', handleConnectionChange);
+            handleConnectionChange();
+        }
+
+        // Add memory usage monitoring for performance
+        if ('memory' in performance) {
+            setInterval(() => {
+                const memInfo = performance.memory;
+                if (memInfo.usedJSHeapSize > memInfo.jsHeapSizeLimit * 0.9) {
+                    console.warn('High memory usage detected, optimizing...');
+                    
+                    // Clean up any unnecessary DOM elements
+                    const oldConfetti = document.querySelectorAll('[style*="confetti-fall"]');
+                    oldConfetti.forEach(el => el.remove());
+                }
+            }, 30000); // Check every 30 seconds
+        }
+
+        // Add battery API support for power-saving mode
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(function(battery) {
+                function handleBatteryChange() {
+                    if (battery.level < 0.2 && !battery.charging) {
+                        // Enable power saving mode
+                        document.body.classList.add('power-saving');
+                        
+                        // Disable animations
+                        const animations = document.querySelectorAll('[class*="animate-"]');
+                        animations.forEach(el => {
+                            el.style.animation = 'none';
+                        });
+                        
+                        showToast(
+                            currentLanguage === 'en' ? 'Power saving mode enabled' :
+                            'Energisparläge aktiverat',
+                            'info'
+                        );
+                    } else {
+                        document.body.classList.remove('power-saving');
+                    }
+                }
+                
+                battery.addEventListener('levelchange', handleBatteryChange);
+                battery.addEventListener('chargingchange', handleBatteryChange);
+                handleBatteryChange();
+            });
+        }
+
+        // Final initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add skip link functionality
+            const skipLink = document.querySelector('.skip-link');
+            if (skipLink) {
+                skipLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.focus();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+            
+            // Initialize all interactive elements
+            const interactiveElements = document.querySelectorAll('button, a, input, select, textarea');
+            interactiveElements.forEach(el => {
+                el.addEventListener('focus', function() {
+                    this.classList.add('focused');
+                });
+                
+                el.addEventListener('blur', function() {
+                    this.classList.remove('focused');
+                });
+            });
+            
+            // Add loading states to all buttons
+            const buttons = document.querySelectorAll('button:not(.close-modal):not(.copy-btn)');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!this.disabled) {
+                        this.classList.add('loading');
+                        setTimeout(() => {
+                            this.classList.remove('loading');
+                        }, 1000);
+                    }
+                });
+            });
+        });
+
     </script>
+
+    <!-- Additional CSS for enhanced functionality -->
+    <style>
+        /* Keyboard navigation styles */
+        .keyboard-navigation *:focus {
+            outline: 3px solid #16A34A !important;
+            outline-offset: 2px !important;
+        }
+        
+        /* High contrast mode */
+        .high-contrast .payment-card {
+            border: 3px solid #000 !important;
+            background: #fff !important;
+        }
+        
+        .high-contrast .btn-primary,
+        .high-contrast .btn-secondary,
+        .high-contrast .btn-accent {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #000 !important;
+        }
+        
+        .high-contrast .text-gray-600,
+        .high-contrast .text-gray-700 {
+            color: #000 !important;
+        }
+        
+        /* Power saving mode */
+        .power-saving * {
+            animation: none !important;
+            transition: none !important;
+        }
+        
+        .power-saving .floating-particles {
+            display: none !important;
+        }
+        
+        /* Slow connection optimizations */
+        .slow-connection .animate-float,
+        .slow-connection .animate-bounce-gentle,
+        .slow-connection .animate-pulse-soft {
+            animation: none !important;
+        }
+        
+        /* Loading states */
+        .loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Focus management */
+        .focused {
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.5) !important;
+        }
+        
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+        
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 10000;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* Enhanced ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* Confetti animation */
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Enhanced modal animations */
+        .modal {
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Improved button hover effects */
+        button:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        /* Enhanced payment card styling */
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .payment-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        /* Gaza flag enhancement */
+        .gaza-flag {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gaza-flag::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.1) 50%, transparent 51%);
+            animation: flag-shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes flag-shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        /* Testimonial card enhancements */
+        .testimonial-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -0.5rem;
+            left: 1rem;
+            font-size: 3rem;
+            color: #16A34A;
+            opacity: 0.2;
+            font-family: serif;
+            z-index: 0;
+        }
+        
+        .testimonial-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Progress bar animations */
+        .progress-bar {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: move-stripes 2s linear infinite;
+        }
+        
+        @keyframes move-stripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        
+        /* Enhanced QR code styling */
+        #swishQRCode {
+            transition: all 0.3s ease;
+        }
+        
+        #swishQRCode:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Copy button states */
+        .copy-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .copy-btn.copied::before {
+            left: 100%;
+        }
+        
+        /* Mobile-specific enhancements */
+        @media (max-width: 768px) {
+            /* Larger touch targets */
+            button, .payment-card, input, select {
+                min-height: 44px;
+            }
+            
+            /* Improved modal spacing */
+            .modal-content {
+                margin: 1rem;
+                max-height: 90vh;
+            }
+            
+            /* Better text sizing */
+            body {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            /* Optimized animations */
+            .payment-card:hover {
+                transform: translateY(-2px);
+            }
+            
+            /* Improved toast positioning */
+            #toast {
+                right: 0.5rem;
+                left: 0.5rem;
+                max-width: none;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #1F2937;
+                --bg-secondary: #374151;
+                --text-primary: #F9FAFB;
+                --text-secondary: #D1D5DB;
+            }
+            
+            body {
+                background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+                color: var(--text-primary);
+            }
+            
+            .modal-content {
+                background: var(--bg-primary);
+                color: var(--text-primary);
+            }
+            
+            .payment-card {
+                background: rgba(55, 65, 81, 0.95);
+                color: var(--text-primary);
+            }
+            
+            .bg-surface {
+                background: var(--bg-secondary);
+            }
+            
+            .text-gray-800 {
+                color: var(--text-primary);
+            }
+            
+            .text-gray-600 {
+                color: var(--text-secondary);
+            }
+            
+            .border-gray-200 {
+                border-color: #4B5563;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .floating-particles,
+            .modal,
+            #toast,
+            #loadingOverlay,
+            .language-switcher,
+            .skip-link {
+                display: none !important;
+            }
+            
+            .payment-card {
+                box-shadow: none !important;
+                border: 1px solid #000 !important;
+                break-inside: avoid;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            h1, h2, h3 {
+                color: black !important;
+            }
+            
+            .btn-primary,
+            .btn-secondary,
+            .btn-accent {
+                background: white !important;
+                color: black !important;
+                border: 2px solid black !important;
+            }
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .modal {
+                transition: none !important;
+            }
+            
+            .modal-content {
+                transform: none !important;
+            }
+            
+            .floating-particles {
+                display: none !important;
+            }
+        }
+        
+        /* Enhanced accessibility */
+        [aria-hidden="true"] {
+            display: none !important;
+        }
+        
+        /* Focus indicators for all interactive elements */
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus,
+        [tabindex]:focus {
+            outline: 3px solid #16A34A;
+            outline-offset: 2px;
+        }
+        
+        /* High contrast mode improvements */
+        @media (prefers-contrast: high) {
+            .payment-card {
+                border: 3px solid #000 !important;
+                background: #fff !important;
+            }
+            
+            .modal-content {
+                border: 3px solid #000 !important;
+            }
+            
+            button {
+                border: 2px solid #000 !important;
+            }
+        }
+        
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #16A34A;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669;
+        }
+        
+        /* Selection styling */
+        ::selection {
+            background: #16A34A;
+            color: white;
+        }
+        
+        ::-moz-selection {
+            background: #16A34A;
+            color: white;
+        }
+        
+        /* Enhanced form styling */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* Improved button states */
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* Enhanced loading overlay */
+        #loadingOverlay {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Improved toast styling */
+        #toast {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Better modal backdrop */
+        .modal {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        
+        /* Enhanced language switcher */
+        .language-switcher {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+        
+        /* Improved floating particles */
+        .floating-particle {
+            will-change: transform;
+        }
+        
+        /* Better performance for animations */
+        .animate-float,
+        .animate-bounce-gentle,
+        .animate-pulse-soft {
+            will-change: transform;
+        }
+        
+        /* Enhanced payment card interactions */
+        .payment-card {
+            will-change: transform, box-shadow;
+        }
+        
+        /* Improved modal content */
+        .modal-content {
+            will-change: transform;
+        }
+        
+        /* Better button interactions */
+        button {
+            will-change: transform;
+        }
+        
+        /* Optimized transitions */
+        * {
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
 </body>
 </html>
